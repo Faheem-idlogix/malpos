@@ -35,17 +35,16 @@ class CdClientController extends Controller
     {
 
         $data = new CdClient();
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->address = $request->address;
-        $data->active = $request->active;
-        $data->is_active = $request->is_active;
-        $data->country_id = $request->country_id;
-        $data->city_id = $request->city_id;
-        $data->phone_no = $request->phone_no;
-        $data->client_role = $request->client_role;
-        $data->created_by = $request->created_by;
-        $data->updated_by = $request->updated_by;
+        $data->name = $request['name'];
+        $data->email = $request['email'];
+        $data->address = $request['address'];
+        $data->phone_no = $request['phone_no'];
+        $data->client_role = $request['client_role'];
+        $data->is_active = $request['is_active'];
+        $data->country_id = $request['country_id'];
+        $data->city_id = $request['city_id'];
+        $data->created_by = $request['created_by'];
+        $data->updated_by = $request['updated_by'];
         $data->save();
         
         return response()->json($data);
@@ -84,12 +83,13 @@ class CdClientController extends Controller
         $data->name = $request['name'];
         $data->email = $request['email'];
         $data->address = $request['address'];
+        $data->phone_no = $request['phone_no'];
         $data->client_role = $request['client_role'];
         $data->is_active = $request['is_active'];
         $data->country_id = $request['country_id'];
         $data->city_id = $request['city_id'];
-        $data->created_id = $request['created_id'];
-        $data->updated_id = $request['updated_id'];
+        $data->created_by = $request['created_by'];
+        $data->updated_by = $request['updated_by'];
         $data->save();
         
         return response()->json($data);
