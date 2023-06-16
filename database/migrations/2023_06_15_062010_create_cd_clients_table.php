@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('address');
-            $table->string('active');
             $table->boolean('is_active');
             $table->string('country_id');
             $table->string('city_id');

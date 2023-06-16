@@ -84,7 +84,7 @@ class CdClientController extends Controller
         $data->name = $request['name'];
         $data->email = $request['email'];
         $data->address = $request['address'];
-        $data->active = $request['active'];
+        $data->client_role = $request['client_role'];
         $data->is_active = $request['is_active'];
         $data->country_id = $request['country_id'];
         $data->city_id = $request['city_id'];
