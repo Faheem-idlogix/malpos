@@ -53,9 +53,11 @@ class CdBrandController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CdBrand $cdBrand)
+    public function edit( $id)
     {
         //
+        $data = CdBrand::find($id);
+        return response()->json($data);
     }
 
     /**

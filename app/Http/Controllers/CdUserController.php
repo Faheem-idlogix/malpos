@@ -55,9 +55,10 @@ class CdUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CdUser $cdUser)
+    public function edit( $id)
     {
-        //
+        $data = CdUser::find($id);
+        return response()->json($data);
     }
 
     /**

@@ -64,10 +64,12 @@ class CdClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CdClient $cdClient)
+    public function edit( $id)
     {
-        //
-        return 'edit';
+        $data = CdClient::find($id);
+        return response()->json($data);
+
+
 
     }
 

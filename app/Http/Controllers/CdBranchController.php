@@ -53,9 +53,10 @@ class CdBranchController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CdBranch $cdBranch)
+    public function edit($id)
     {
-        //
+        $data = CdBranch::find($id);
+        return response()->json($data);
     }
 
     /**
