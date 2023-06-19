@@ -26,6 +26,14 @@ Route::resource('cdclients', CdClientController::class);
 Route::post('login',[UserController::class,'loginUser']);
 
 
+Route::get('user', [UserController::class, 'index'])->name('user');
+Route::post('user_store', [UserController::class, 'store'])->name('user_store');
+Route::post('user_update/{id}', [UserController::class, 'update'])->name('user_update');
+Route::get('user_edit/{id}', [UserController::class, 'edit'])->name('user_edit');
+Route::delete('user_delete/{id}', [UserController::class, 'destroy'])->name('user_delete');
+
+
+
 Route::get('cdclient', [CdClientController::class, 'index'])->name('cdclient');
 Route::post('cdclient_store', [CdClientController::class, 'store'])->name('cdclient_store');
 Route::post('cdclient_update/{id}', [CdClientController::class, 'update'])->name('cdclient_update');
