@@ -14,7 +14,7 @@ class MdProductCategoryController extends Controller
     public function index($id = null)
     {
      if($id != null){
-            $product_category = MdProductCategory::where('product_category_id', $id)->get();
+            $product_category = MdProductCategory::where('md_product_category_id', $id)->get();
         }
         else{
             $product_category = MdProductCategory::all();
