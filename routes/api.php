@@ -24,8 +24,10 @@ use App\Http\Controllers\MdProductCategoryController;
 |
 */
 Route::resource('cdclients', CdClientController::class);
+Route::middleware('cors')->group(function () {
 
 Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index'])->name('product_category');
+});
 
 
 
