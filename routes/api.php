@@ -7,6 +7,8 @@ use App\Http\Controllers\CdUserController;
 use App\Http\Controllers\CdBrandController;
 use App\Http\Controllers\CdBranchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MdProductCategoryController;
+
 
 
 
@@ -22,6 +24,9 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::resource('cdclients', CdClientController::class);
+
+Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index'])->name('product_category');
+
 
 
 Route::get('getuser', [UserController::class, 'index'])->name('user');
