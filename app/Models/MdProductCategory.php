@@ -9,8 +9,8 @@ class MdProductCategory extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'product_category_id';
-    protected $guarded = ['product_category_id'];
+    protected $primaryKey = 'md_product_category_id';
+    protected $guarded = ['md_product_category_id'];
 
     public function getProductCategoryImageAttribute()
 {
