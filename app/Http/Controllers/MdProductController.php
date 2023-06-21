@@ -10,9 +10,16 @@ class MdProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id = null)
     {
-        //
+     if($id != null){
+            $product = MdProduct::where('md_product_category_id', $id)->get();
+        }
+        else{
+            $product = MdProduct::all();
+            // $order_detail = OrderDetail::all();
+        }
+        return response()->json(['product'=>$product]);
     }
 
     /**

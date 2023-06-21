@@ -8,6 +8,8 @@ use App\Http\Controllers\CdBrandController;
 use App\Http\Controllers\CdBranchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MdProductCategoryController;
+use App\Http\Controllers\MdProductController;
+
 
 
 
@@ -24,11 +26,9 @@ use App\Http\Controllers\MdProductCategoryController;
 |
 */
 Route::resource('cdclients', CdClientController::class);
-Route::middleware('cors')->group(function () {
 
 Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index'])->name('product_category');
-});
-
+Route::get('product/{id?}', [MdProductController::class, 'index'])->name('product');
 
 
 Route::get('getuser', [UserController::class, 'index'])->name('user');
