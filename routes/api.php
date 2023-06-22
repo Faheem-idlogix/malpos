@@ -9,10 +9,7 @@ use App\Http\Controllers\CdBranchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MdProductCategoryController;
 use App\Http\Controllers\MdProductController;
-
-
-
-
+use App\Http\Controllers\TdSaleOrderController;
 
 
 /*
@@ -30,13 +27,16 @@ Route::resource('cdclients', CdClientController::class);
 Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index'])->name('product_category');
 Route::get('product/{id?}', [MdProductController::class, 'index'])->name('product');
 
+Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');
+
+
 
 Route::get('getuser', [UserController::class, 'index'])->name('user');
 Route::post('user_store', [UserController::class, 'store'])->name('user_store');
 Route::post('user_update/{id}', [UserController::class, 'update'])->name('user_update');
 Route::get('user_edit/{id}', [UserController::class, 'edit'])->name('user_edit');
 Route::delete('user_delete/{id}', [UserController::class, 'destroy'])->name('user_delete');
-Route::post('login', [UserController::class, 'loginUser'])->name('login');
+// Route::post('login', [UserController::class, 'loginUser'])->name('login');
 
 
 

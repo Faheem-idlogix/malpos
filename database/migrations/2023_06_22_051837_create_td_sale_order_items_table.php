@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('td_sale_orders', function (Blueprint $table) {
-            $table->id('td_sale_order_id');
-            $table->string('td_sale_order_code')->unique();
-            $table->string('customer')->nullable();
-            $table->string('status')->nullable();
-            $table->string('src')->nullable();
-            $table->string('order_type')->nullable();
-            $table->string('payment_type')->nullable();
-            $table->string('time')->nullable();
-            $table->string('discount')->nullable();
-            $table->foreignId('user_id')->on('users')->nullable();
-            $table->string('order_amount');
+        Schema::create('td_sale_order_items', function (Blueprint $table) {
+            $table->id('td_sale_order_item_id');
+            $table->foreignId('order_id')->on('orders');
+            $table->foreignId('product_id')->on('products');
+            $table->string('qty')->nullable();
+            $table->string('price')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
@@ -38,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('td_sale_orders');
+        Schema::dropIfExists('td_sale_order_items');
     }
 };
