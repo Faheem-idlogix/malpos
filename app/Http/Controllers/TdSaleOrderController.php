@@ -28,50 +28,54 @@ class TdSaleOrderController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $currentTimestamp = time();
-        $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
-        $data = new TdSaleOrder();
-        $data->customer = 'Admin';
-        $data->status = 'paid';
-        $data->src = 'null';
-        $data->time = $currentDateTime;
-        $data->order_type = $request->order_type;
-        $data->order_amount = $request->order_amount;
-        $data->user_id = '1';
-        $data->discount = $request->discount;
-        $data->td_sale_order_code = $data->TdSaleOrderCode();
-        $data->cd_client_id = '1';
-        $data->cd_brand_id = '1';
-        $data->cd_branch_id = '1';
-        $data->is_active = '1';
-        $data->created_by = '1';
-        $data->updated_by = '1';
-        $data->save();
-        $latestOrderId = TdSaleOrder::latest('td_sale_order_id')->pluck('td_sale_order_id')->first();
-        $orderId = $latestOrderId;
+{
+    $currentTimestamp = time();
+    $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
+    $data = new TdSaleOrder();
+    $data->customer = 'Admin';
+    $data->status = 'paid';
+    $data->src = 'null';
+    $data->time = $currentDateTime;
+    $data->order_type = $request->order_type;
+    $data->order_amount = $request->order_amount;
+    $data->user_id = '1';
+    $data->discount = $request->discount;
+    $data->td_sale_order_code = $data->TdSaleOrderCode();
+    $data->cd_client_id = '1';
+    $data->cd_brand_id = '1';
+    $data->cd_branch_id = '1';
+    $data->is_active = '1';
+    $data->created_by = '1';
+    $data->updated_by = '1';
+    $data->save();
 
-        $orderDetails['td_sale_order_id'] = $orderId;
-        $index =0;
-        foreach ($request->products as $product) {
-            $orderDetails = new TdSaleOrderItem();
+    $latestOrderId = TdSaleOrder::latest('td_sale_order_id')->pluck('td_sale_order_id')->first();
+    $orderId = $latestOrderId;
 
-            $orderDetails->product_id = $product->product_id;
-            $orderDetails->qty = $product->qty;
-            $orderDetails->price = $product->price;
-            $orderDetails->cd_client_id = '1';
-            $orderDetails->cd_brand_id = '1';
-            $orderDetails->cd_branch_id = '1';
-            $orderDetails->is_active = '1';
-            $orderDetails->created_by = '1';
-            $orderDetails->updated_by = '1';
-            $orderDetails->order_id = $latestOrderId;
-            $orderDetails->save();
-            $index++;
-        }
-        return Response($data);
+    $orderDetails['td_sale_order_id'] = $orderId;
+    $index = 0;
 
+    foreach ($request->products as $product) {
+        $orderDetails = new TdSaleOrderItem();
+
+        $orderDetails->product_id = $product['product_id'];
+        $orderDetails->qty = $product['qty'];
+        $orderDetails->price = $product['price'];
+        $orderDetails->cd_client_id = '1';
+        $orderDetails->cd_brand_id = '1';
+        $orderDetails->cd_branch_id = '1';
+        $orderDetails->is_active = '1';
+        $orderDetails->created_by = '1';
+        $orderDetails->updated_by = '1';
+        $orderDetails->order_id = $latestOrderId;
+        $orderDetails->save();
+
+        $index++;
     }
+
+    return response()->json($data);
+}
+
 
     /**
      * Display the specified resource.
