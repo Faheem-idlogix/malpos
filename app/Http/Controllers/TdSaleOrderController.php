@@ -53,12 +53,12 @@ class TdSaleOrderController extends Controller
 
         $orderDetails['td_sale_order_id'] = $orderId;
         $index =0;
-        foreach ($request->product_id as $product) {
+        foreach ($request->products as $product) {
             $orderDetails = new TdSaleOrderItem();
 
-            $orderDetails->product_id = $product;
-            $orderDetails->qty = $request->qty[$index];
-            $orderDetails->price = $request->price[$index];
+            $orderDetails->product_id = $product->product_id;
+            $orderDetails->qty = $product->qty;
+            $orderDetails->price = $product->price;
             $orderDetails->cd_client_id = '1';
             $orderDetails->cd_brand_id = '1';
             $orderDetails->cd_branch_id = '1';
