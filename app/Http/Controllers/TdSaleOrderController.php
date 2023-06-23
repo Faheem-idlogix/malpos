@@ -53,7 +53,6 @@ class TdSaleOrderController extends Controller
     $orderId = $latestOrderId;
 
     $orderDetails['td_sale_order_id'] = $orderId;
-    $index = 0;
 
     foreach ($request->products as $product) {
         $orderDetails = new TdSaleOrderItem();
@@ -69,8 +68,6 @@ class TdSaleOrderController extends Controller
         $orderDetails->updated_by = '1';
         $orderDetails->order_id = $latestOrderId;
         $orderDetails->save();
-
-        $index++;
     }
 
     return response()->json($data);
