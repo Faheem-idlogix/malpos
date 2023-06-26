@@ -28,6 +28,14 @@ Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index
 Route::get('product/{id?}', [MdProductController::class, 'index'])->name('product');
 
 Route::post('product_category_store', [MdProductCategoryController::class, 'store'])->name('product_category_store');
+Route::get('product_category_edit/{id}', [MdProductCategoryController::class, 'edit'])->name('product_category_edit');
+Route::post('product_category_update/{id}', [MdProductCategoryController::class, 'update'])->name('product_category_update');
+Route::delete('product_category_delete/{id}', [MdProductCategoryController::class, 'destroy'])->name('product_category_delete');
+
+
+
+
+
 Route::post('product_store', [MdProductController::class, 'store'])->name('product_store');
 
 Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');

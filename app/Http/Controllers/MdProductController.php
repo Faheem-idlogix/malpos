@@ -16,7 +16,7 @@ class MdProductController extends Controller
             $product = MdProduct::where('md_product_category_id', $id)->get();
         }
         else{
-            $product = MdProduct::all();
+            $product = MdProduct::with('client','brand', 'branch')->get();
             // $order_detail = OrderDetail::all();
         }
         return response()->json(['product'=>$product]);
