@@ -10,4 +10,7 @@ class CdBrand extends Model
     use HasFactory;
     protected $primaryKey = 'cd_brand_id';
     protected $guarded = ['cd_brand_id'];
+    public function client(){
+        return $this->belongsTo(CdClient::class, 'client_id');
+    }
 }

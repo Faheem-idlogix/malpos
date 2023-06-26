@@ -17,7 +17,7 @@ class MdProductCategoryController extends Controller
             $product_category = MdProductCategory::where('md_product_category_id', $id)->get();
         }
         else{
-            $product_category = MdProductCategory::all();
+            $product_category = MdProductCategory::with('client','brand', 'branch')->get();
             // $order_detail = OrderDetail::all();
         }
         return response()->json(['product_category'=>$product_category]);
@@ -40,6 +40,7 @@ class MdProductCategoryController extends Controller
         $data = new MdProductCategory();
         $data->product_category_code = $request->product_category_code;
         $data->product_category_name = $request->product_category_name;
+        $data->product_category_description = $request->product_category_description;
         $data->cd_client_id = $request->cd_client_id;
         $data->cd_brand_id = $request->cd_brand_id;
         $data->cd_branch_id = $request->cd_branch_id;

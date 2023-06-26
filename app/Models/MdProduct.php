@@ -16,6 +16,6 @@ class MdProduct extends Model
 
     public function getProductImageAttribute()
 {
-    return asset('img/product_category_image/'.$this->attributes['product_image']);
+    return asset('img/product_image/'.$this->attributes['product_image']);
 }
 }

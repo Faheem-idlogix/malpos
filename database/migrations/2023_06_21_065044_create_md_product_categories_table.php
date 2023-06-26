@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('md_product_category_id');
             $table->string('product_category_code');
             $table->string('product_category_name');
+            $table->string('product_category_description');
             $table->string('product_category_image');
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
