@@ -27,6 +27,9 @@ Route::resource('cdclients', CdClientController::class);
 Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index'])->name('product_category');
 Route::get('product/{id?}', [MdProductController::class, 'index'])->name('product');
 
+Route::post('product_category_store', [MdProductCategoryController::class, 'store'])->name('product_category_store');
+Route::post('product_store', [MdProductController::class, 'store'])->name('product_store');
+
 Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');
 
 

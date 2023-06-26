@@ -16,6 +16,12 @@ return new class extends Migration
             $table->string('product_category_code');
             $table->string('product_category_name');
             $table->string('product_category_image');
+            $table->foreignId('cd_client_id')->on('cd_clients');
+            $table->foreignId('cd_brand_id')->on('cd_brands');
+            $table->foreignId('cd_branch_id')->on('cd_branchs');
+            $table->boolean('is_active');
+            $table->string('created_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }

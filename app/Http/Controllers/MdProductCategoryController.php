@@ -37,6 +37,23 @@ class MdProductCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $data = new MdProductCategory();
+        $data->product_category_code = $request->product_category_code;
+        $data->product_category_name = $request->product_category_name;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
+        if ($image = $request->file('product_category_image')) {
+            $destinationPath = public_path('img/product_category_image/');
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $data->product_category_image = $profileImage;
+        }
+        $data->save();
+        return response()->json($data);
     }
 
     /**
