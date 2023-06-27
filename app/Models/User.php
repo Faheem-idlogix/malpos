@@ -21,6 +21,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'actions',
+        'cd_client_id',
+        'cd_brand_id',
+        'cd_branch_id',
+        'is_active',
+        'created_by',
+        'updated_by',
     ];
 
     /**

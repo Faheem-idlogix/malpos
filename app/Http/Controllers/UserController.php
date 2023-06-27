@@ -54,7 +54,6 @@ class UserController extends Controller
          $data->created_by = $request->created_by;
          $data->updated_by = $request->updated_by;
          $data->save();
-         
          return response()->json($data);
      }
  
