@@ -31,7 +31,7 @@ class TdSaleOrderController extends Controller
      public function receipt()
      {
          //
-         $data =  TdSaleOrder::with('td_sale_order_item')->get();
+         $data =  TdSaleOrderItem::with('td_sale_order_id')->get();
          return response()->json($data);
 
 

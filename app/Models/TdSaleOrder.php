@@ -23,7 +23,7 @@ class TdSaleOrder extends Model
     }
 
     public function td_sale_order_item(){
-        return $this->belongsTo(TdSaleOrderItem::class, 'td_sale_order_id');
+        return $this->hasMany(TdSaleOrderItem::class, 'td_sale_order_id');
     }
 
     public function TdSaleOrderCode()
