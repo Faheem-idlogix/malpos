@@ -37,6 +37,10 @@ Route::delete('product_category_delete/{id}', [MdProductCategoryController::clas
 
 
 Route::post('product_store', [MdProductController::class, 'store'])->name('product_store');
+Route::get('product_edit/{id}', [MdProductController::class, 'edit'])->name('product_edit');
+Route::post('product_update/{id}', [MdProductController::class, 'update'])->name('product_update');
+Route::delete('product_delete/{id}', [MdProductController::class, 'destroy'])->name('product_delete');
+
 
 Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');
 
