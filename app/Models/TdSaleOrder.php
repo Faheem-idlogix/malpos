@@ -22,6 +22,10 @@ class TdSaleOrder extends Model
         return $this->hasMany(TdSaleOrderDetail::class, 'td_sale_order_id');
     }
 
+    public function td_sale_order_item(){
+        return $this->belongsTo(TdSaleOrderItem::class, 'td_sale_order_id');
+    }
+
     public function TdSaleOrderCode()
     {
         $check = TdSaleOrder::where('td_sale_order_code','like','%#%' )->latest()->first()->td_sale_order_code ?? null;

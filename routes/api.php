@@ -25,7 +25,6 @@ use App\Http\Controllers\TdSaleOrderController;
 Route::resource('cdclients', CdClientController::class);
 
 Route::group(['middleware' => 'auth:sanctum'],function(){
-});
 
 Route::get('product_category/{id?}', [MdProductCategoryController::class, 'index'])->name('product_category');
 Route::get('product/{id?}', [MdProductController::class, 'index'])->name('product');
@@ -36,9 +35,6 @@ Route::post('product_category_update/{id}', [MdProductCategoryController::class,
 Route::delete('product_category_delete/{id}', [MdProductCategoryController::class, 'destroy'])->name('product_category_delete');
 
 
-
-
-
 Route::post('product_store', [MdProductController::class, 'store'])->name('product_store');
 Route::get('product_edit/{id}', [MdProductController::class, 'edit'])->name('product_edit');
 Route::post('product_update/{id}', [MdProductController::class, 'update'])->name('product_update');
@@ -46,6 +42,12 @@ Route::delete('product_delete/{id}', [MdProductController::class, 'destroy'])->n
 
 
 Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');
+Route::post('update_order/{$id}', [TdSaleOrderController::class, 'update'])->name('update_order');
+Route::delete('delete_order/{$id}', [TdSaleOrderController::class, 'destroy'])->name('delete_order');
+Route::get('order_receipts', [TdSaleOrderController::class, 'receipt'])->name('order_receipts');
+
+
+
 
 
 
@@ -82,6 +84,7 @@ Route::post('cdbranch_store', [CdBranchController::class, 'store'])->name('cdbra
 Route::post('cdbranch_update/{id}', [CdBranchController::class, 'update'])->name('cdbranch_update');
 Route::get('cdbranch_edit/{id}', [CdBranchController::class, 'edit'])->name('cdbranch_edit');
 Route::delete('cdbranch_delete/{id}', [CdBranchController::class, 'destroy'])->name('cdbranch_delete');
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
