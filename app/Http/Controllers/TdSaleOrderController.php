@@ -50,6 +50,7 @@ class TdSaleOrderController extends Controller
     $data->src = 'null';
     $data->time = $currentDateTime;
     $data->order_type = $request->order_type;
+    $data->payment_type = $request->payment_type;
     $data->order_amount = $request->order_amount;
     $data->user_id = '1';
     $data->discount = $request->discount;
@@ -116,6 +117,7 @@ class TdSaleOrderController extends Controller
         $data->src = 'null';
         $data->time = $currentDateTime;
         $data->order_type = $request->order_type;
+        $data->payment_type = $request->payment_type;
         $data->order_amount = $request->order_amount;
         $data->user_id = '1';
         $data->discount = $request->discount;
