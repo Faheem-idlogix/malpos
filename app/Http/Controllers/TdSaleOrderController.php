@@ -44,21 +44,14 @@ class TdSaleOrderController extends Controller
 {
     $currentTimestamp = time();
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
-    if($request->td_sale_order_id != null){
-        $data =  TdSaleOrder::find($request->td_sale_order_id);
-    }
-    else{
-        $data = new TdSaleOrder();
-        $data->time = $currentDateTime;
-    }
-
-   
+    $data = new TdSaleOrder();
     $data->customer = 'Admin';
     $data->status = $request->status;
     $data->src = 'null';
     $data->order_type = $request->order_type;
     $data->payment_type = $request->payment_type;
     $data->order_amount = $request->order_amount;
+    $data->time = $currentDateTime;
     $data->user_id = '1';
     $data->discount = $request->discount;
     $data->td_sale_order_code = $data->TdSaleOrderCode();
@@ -112,7 +105,7 @@ class TdSaleOrderController extends Controller
     {
         //
         $data =  TdSaleOrder::find($id);
-        return response()->json($data);
+            return response()->json($data);
 
     }
 
@@ -133,7 +126,6 @@ class TdSaleOrderController extends Controller
         $data->order_amount = $request->order_amount;
         $data->user_id = '1';
         $data->discount = $request->discount;
-        $data->td_sale_order_code = $data->TdSaleOrderCode();
         $data->cd_client_id = '1';
         $data->cd_brand_id = '1';
         $data->cd_branch_id = '1';
@@ -160,6 +152,29 @@ class TdSaleOrderController extends Controller
         }
     
         return response()->json($data);
+    }
+
+    public function checkout(Request $request, $orderId){
+       
+        $data = TdSaleOrder::findOrFail($orderId);
+        $data->customer = 'Admin';
+        $data->status = 'paid';
+        $data->src = 'null';
+        $data->order_type = $request->order_type;
+        $data->payment_type = $request->payment_type;
+        $data->order_amount = $request->order_amount;
+        $data->card_no = $request->card_no;
+        $data->card_holder_name = $request->card_holder_name;
+        $data->user_id = '1';
+        $data->discount = $request->discount;
+        $data->cd_client_id = '1';
+        $data->cd_brand_id = '1';
+        $data->cd_branch_id = '1';
+        $data->is_active = '1';
+        $data->created_by = '1';
+        $data->updated_by = '1';
+        $data->save();
+
     }
     
 
