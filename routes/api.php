@@ -56,6 +56,11 @@ Route::get('user_edit/{id}', [UserController::class, 'edit'])->name('user_edit')
 Route::delete('user_delete/{id}', [UserController::class, 'destroy'])->name('user_delete');
 Route::post('user_login', [UserController::class, 'loginUser'])->name('user_login');
 
+Route::post('store_pin', [UserController::class, 'storePin'])->name('store_pin');
+Route::post('check_pin', [UserController::class, 'checkPin'])->name('check_pin');
+
+
+
 
 
 Route::get('cdclient', [CdClientController::class, 'index'])->name('cdclient');

@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('src')->nullable();
             $table->string('order_type')->nullable();
             $table->string('payment_type')->nullable();
-            $table->string('time')->nullable();
+            $table->dateTime('time')->nullable();
             $table->string('discount')->nullable();
+            $table->string('card_no')->nullable();
+            $table->string('card_holder_name')->nullable();
             $table->foreignId('user_id')->on('users')->nullable();
             $table->string('order_amount');
             $table->foreignId('cd_client_id')->on('cd_clients');

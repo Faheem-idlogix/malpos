@@ -46,7 +46,7 @@ class TdSaleOrderController extends Controller
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
     $data = new TdSaleOrder();
     $data->customer = 'Admin';
-    $data->status = 'paid';
+    $data->status = $request->status;
     $data->src = 'null';
     $data->time = $currentDateTime;
     $data->order_type = $request->order_type;

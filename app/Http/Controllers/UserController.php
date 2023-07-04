@@ -121,11 +121,48 @@ class UserController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
             $token = $user->createToken('MyApp')->plainTextToken;
+
+            $auth_user = User::where('email', $request->email)->first();
+            $auth_user->token = $token;
+            $auth_user->save();
+
     
             return response()->json(['token' => $token, 'user' => $user], 200);
         }
     
         return response()->json(['message' => 'Email or password is incorrect'], 401);
+    }
+
+        public function storePin(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pin' => 'required|digits:4',
+            'token' => 'required',
+        ]);
+        $token = $validatedData['token'];
+        $user = User::where('token', $token)->first(); 
+        $user->pin = $validatedData['pin'];
+        $user->save();
+        return response()->json($user);
+    }
+
+        public function checkPin(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pin' => 'required|digits:4',
+            'token' => 'required',
+        ]);
+
+        $user = User::where('token', $validatedData['token'])
+        ->where('pin', $validatedData['pin'])
+        ->first();
+
+        if ($user) {
+
+        return response()->json($user);
+        } else {
+        return response()->json(['error' => 'Invalid token or PIN'], 422);
+        }
     }
 
     /**
