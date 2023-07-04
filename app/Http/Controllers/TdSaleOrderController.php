@@ -108,9 +108,12 @@ class TdSaleOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, $id)
+    public function edit( $id)
     {
         //
+        $data =  TdSaleOrder::find($id);
+        return response()->json($data);
+
     }
 
     /**

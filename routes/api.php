@@ -44,6 +44,8 @@ Route::delete('product_delete/{id}', [MdProductController::class, 'destroy'])->n
 
 
 Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');
+Route::get('edit_order/{id}', [TdSaleOrderController::class, 'edit'])->name('edit_order');
+
 Route::post('update_order/{$id}', [TdSaleOrderController::class, 'update'])->name('update_order');
 Route::delete('delete_order/{$id}', [TdSaleOrderController::class, 'destroy'])->name('delete_order');
 Route::get('order_receipts', [TdSaleOrderController::class, 'receipt'])->name('order_receipts');
