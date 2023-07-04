@@ -44,11 +44,18 @@ class TdSaleOrderController extends Controller
 {
     $currentTimestamp = time();
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
-    $data = new TdSaleOrder();
+    if($request->td_sale_order_id != null){
+        $data =  TdSaleOrder::find($request->td_sale_order_id);
+    }
+    else{
+        $data = new TdSaleOrder();
+        $data->time = $currentDateTime;
+    }
+
+   
     $data->customer = 'Admin';
     $data->status = $request->status;
     $data->src = 'null';
-    $data->time = $currentDateTime;
     $data->order_type = $request->order_type;
     $data->payment_type = $request->payment_type;
     $data->order_amount = $request->order_amount;
@@ -88,6 +95,8 @@ class TdSaleOrderController extends Controller
 }
 
 
+
+
     /**
      * Display the specified resource.
      */
@@ -99,7 +108,7 @@ class TdSaleOrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TdSaleOrder $tdSaleOrder)
+    public function edit(Request $request, $id)
     {
         //
     }
