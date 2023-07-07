@@ -19,16 +19,16 @@ return new class extends Migration
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
             $table->foreignId('td_sale_order_id')->on('td_sale_orders');
-            $table->string('account_name');
-            $table->string('routing_number');
-            $table->string('check_number');
-            $table->string('account_number');
-            $table->date('date_promised');
-            $table->string('credit_card');
-            $table->string('credit_card_number');
-            $table->boolean('is_active');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->string('account_name')->nullable();
+            $table->string('routing_number')->nullable();
+            $table->string('check_number')->nullable();
+            $table->string('account_number')->nullable();
+            $table->date('date_promised')->nullable();
+            $table->string('credit_card')->nullable();
+            $table->string('credit_card_number')->nullable();
+            $table->boolean('is_active')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
