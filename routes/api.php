@@ -40,16 +40,17 @@ Route::get('product_category_edit/{id}', [MdProductCategoryController::class, 'e
 Route::post('product_category_update/{id}', [MdProductCategoryController::class, 'update'])->name('product_category_update');
 Route::delete('product_category_delete/{id}', [MdProductCategoryController::class, 'destroy'])->name('product_category_delete');
 
+Route::get('tax_category/{id?}', [TdTaxCategoryController::class, 'index'])->name('tax_category');
 Route::post('tax_category_store', [TdTaxCategoryController::class, 'store'])->name('tax_category_store');
 Route::get('tax_category_edit/{id}', [TdTaxCategoryController::class, 'edit'])->name('tax_category_edit');
 Route::post('tax_category_update/{id}', [TdTaxCategoryController::class, 'update'])->name('tax_category_update');
 Route::delete('tax_category_delete/{id}', [TdTaxCategoryController::class, 'destroy'])->name('tax_category_delete');
 
+Route::get('tax_rate/{id?}', [TdTaxRateController::class, 'index'])->name('tax_rate');
 Route::post('tax_rate_store', [TdTaxRateController::class, 'store'])->name('tax_rate_store');
 Route::get('tax_rate_edit/{id}', [TdTaxRateController::class, 'edit'])->name('tax_rate_edit');
 Route::post('tax_rate_update/{id}', [TdTaxRateController::class, 'update'])->name('tax_rate_update');
 Route::delete('tax_rate_delete/{id}', [TdTaxRateController::class, 'destroy'])->name('tax_rate_delete');
-
 Route::post('product_store', [MdProductController::class, 'store'])->name('product_store');
 Route::get('product_edit/{id}', [MdProductController::class, 'edit'])->name('product_edit');
 Route::post('product_update/{id}', [MdProductController::class, 'update'])->name('product_update');
