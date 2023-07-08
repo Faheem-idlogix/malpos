@@ -31,11 +31,34 @@ class TdSaleOrderController extends Controller
      * Store a newly created resource in storage.
      */
 
-     public function receipt()
+     public function receipt($filter  = null)
      {
          //
-         $data =  TdSaleOrder::all();
-         return response()->json($data);
+         if($filter != null){
+            $status =TdSaleOrder::where('status', $filter)->get();
+            $payment_type =TdSaleOrder::where('payment_type', $filter)->get();
+            $order_type =TdSaleOrder::where('order_type', $filter)->get();
+            if($status != '[]'){
+             $data = $status;
+             return response()->json($data);
+            }
+            if($payment_type != '[]'){
+                $data = $payment_type;
+                return response()->json($data);
+
+            }
+            if($order_type != '[]'){
+                $data = $order_type;
+                return response()->json($data);
+
+            }
+
+         }
+         else{
+            $data =  TdSaleOrder::all();
+            return response()->json($data);
+
+         }
 
 
      }
@@ -151,7 +174,7 @@ class TdSaleOrderController extends Controller
         $data->created_by = '1';
         $data->updated_by = '1';
         $data->save();
-    
+
         // Update order details
         TdSaleOrderItem::where('order_id', $orderId)->delete();
         foreach ($request->products as $product) {
@@ -170,7 +193,7 @@ class TdSaleOrderController extends Controller
         }
 
         TdPaymentDetail::where('td_sale_order_id', $orderId)->delete();
-        
+
     foreach ($request->paidAmount as $item) {
         $paymentDetails = new TdPaymentDetail();
 
@@ -185,12 +208,12 @@ class TdSaleOrderController extends Controller
         $paymentDetails->td_sale_order_id = $latestOrderId;
         $paymentDetails->save();
     }
-    
+
         return response()->json($data);
     }
 
     public function checkout(Request $request, $orderId){
-       
+
         $data = TdSaleOrder::findOrFail($orderId);
         $data->customer = 'Admin';
         $data->status = 'paid';
@@ -211,7 +234,7 @@ class TdSaleOrderController extends Controller
         $data->save();
 
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -219,13 +242,13 @@ class TdSaleOrderController extends Controller
     public function destroy($orderId)
     {
         $order = TdSaleOrder::findOrFail($orderId);
-    
+
         // Delete order details
         TdSaleOrderItem::where('order_id', $orderId)->delete();
-    
+
         // Delete the order
         $order->delete();
-    
+
         return response()->json(['message' => 'Order deleted successfully']);
     }
 }

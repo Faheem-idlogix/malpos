@@ -62,7 +62,8 @@ Route::get('edit_order/{id}', [TdSaleOrderController::class, 'edit'])->name('edi
 Route::post('checkout_order/{id}', [TdSaleOrderController::class, 'checkout'])->name('checkout_order');
 Route::post('update_order/{$id}', [TdSaleOrderController::class, 'update'])->name('update_order');
 Route::delete('delete_order/{$id}', [TdSaleOrderController::class, 'destroy'])->name('delete_order');
-Route::get('order_receipts', [TdSaleOrderController::class, 'receipt'])->name('order_receipts');
+Route::get('order_receipts/{filter?}', [TdSaleOrderController::class, 'receipt'])->name('order_receipts');
+
 
 
 Route::get('getuser', [UserController::class, 'index'])->name('user');
