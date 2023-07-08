@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\TdSaleOrder;
 use Illuminate\Http\Request;
 use App\Models\TdSaleOrderItem;
+use App\Models\TdPaymentDetail;
+
+
 
 class TdSaleOrderController extends Controller
 {
