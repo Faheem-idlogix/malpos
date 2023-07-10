@@ -63,6 +63,7 @@ Route::post('checkout_order/{id}', [TdSaleOrderController::class, 'checkout'])->
 Route::post('update_order/{$id}', [TdSaleOrderController::class, 'update'])->name('update_order');
 Route::delete('delete_order/{$id}', [TdSaleOrderController::class, 'destroy'])->name('delete_order');
 Route::get('order_receipts/{filter?}', [TdSaleOrderController::class, 'receipt'])->name('order_receipts');
+Route::get('check_order_receipt/{id}', [TdSaleOrderController::class, 'check_order_receipt'])->name('check_order_receipt');
 
 
 

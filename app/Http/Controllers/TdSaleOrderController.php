@@ -31,6 +31,13 @@ class TdSaleOrderController extends Controller
      * Store a newly created resource in storage.
      */
 
+     public function check_order_receipt($id){
+        $data =  TdSaleOrder::find($id)->with('td_sale_order_item')->get();
+        return $data;
+
+
+     }
+
      public function receipt($filter  = null)
      {
          //
