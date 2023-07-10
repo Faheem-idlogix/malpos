@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('card_no')->nullable();
             $table->string('card_holder_name')->nullable();
             $table->foreignId('user_id')->on('users')->nullable();
-            $table->string('order_amount');
+            $table->string('order_amount')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
