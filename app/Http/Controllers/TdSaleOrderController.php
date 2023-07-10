@@ -32,7 +32,7 @@ class TdSaleOrderController extends Controller
      */
 
      public function check_order_receipt($id){
-        $data =  TdSaleOrder::where('td_sale_order_item', $id)->with('td_sale_order_item')->get();
+        $data =  TdSaleOrder::where('td_sale_order_id', $id)->with('td_sale_order_item')->get();
         return $data;
 
 
