@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('td_sale_order_items', function (Blueprint $table) {
             $table->id('td_sale_order_item_id');
             $table->foreignId('td_sale_order_id')->on('td_sale_orders');
-            $table->foreignId('product_id')->on('products');
+            $table->foreignId('md_product_id')->on('md_products');
             $table->string('qty')->nullable();
             $table->string('price')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');

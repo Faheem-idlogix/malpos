@@ -32,7 +32,7 @@ class TdSaleOrderController extends Controller
      */
 
      public function check_order_receipt($id){
-        $data =  TdSaleOrder::with('td_sale_order_item')->where('td_sale_order_id', $id)->get();
+        $data =  TdSaleOrder::with('td_sale_order_item.md_product')->where('td_sale_order_id', $id)->get();
         return response()->json($data);
 
 
@@ -75,6 +75,7 @@ class TdSaleOrderController extends Controller
 
     public function store(Request $request)
 {
+
     $currentTimestamp = time();
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
     $data = new TdSaleOrder();
@@ -104,7 +105,7 @@ class TdSaleOrderController extends Controller
     foreach ($request->products as $product) {
         $orderDetails = new TdSaleOrderItem();
 
-        $orderDetails->product_id = $product['product_id'];
+        $orderDetails->md_product_id = $product['md_product_id'];
         $orderDetails->qty = $product['qty'];
         $orderDetails->price = $product['price'];
         $orderDetails->cd_client_id = '1';
@@ -113,7 +114,7 @@ class TdSaleOrderController extends Controller
         $orderDetails->is_active = '1';
         $orderDetails->created_by = '1';
         $orderDetails->updated_by = '1';
-        $orderDetails->order_id = $latestOrderId;
+        $orderDetails->td_sale_order_id = $latestOrderId;
         $orderDetails->save();
     }
 
@@ -162,6 +163,7 @@ class TdSaleOrderController extends Controller
      */
     public function update(Request $request, $orderId)
     {
+
         $currentTimestamp = time();
         $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
         $data = TdSaleOrder::findOrFail($orderId);
@@ -183,10 +185,10 @@ class TdSaleOrderController extends Controller
         $data->save();
 
         // Update order details
-        TdSaleOrderItem::where('order_id', $orderId)->delete();
+        TdSaleOrderItem::where('td_sale_order_id', $orderId)->delete();
         foreach ($request->products as $product) {
             $orderDetails = new TdSaleOrderItem();
-            $orderDetails->product_id = $product['product_id'];
+            $orderDetails->md_product_id = $product['md_product_id'];
             $orderDetails->qty = $product['qty'];
             $orderDetails->price = $product['price'];
             $orderDetails->cd_client_id = '1';
@@ -195,7 +197,7 @@ class TdSaleOrderController extends Controller
             $orderDetails->is_active = '1';
             $orderDetails->created_by = '1';
             $orderDetails->updated_by = '1';
-            $orderDetails->order_id = $orderId;
+            $orderDetails->td_sale_order_id = $orderId;
             $orderDetails->save();
         }
 
@@ -212,7 +214,7 @@ class TdSaleOrderController extends Controller
         $paymentDetails->is_active = '1';
         $paymentDetails->created_by = '1';
         $paymentDetails->updated_by = '1';
-        $paymentDetails->td_sale_order_id = $latestOrderId;
+        $paymentDetails->td_sale_order_id = $orderId;
         $paymentDetails->save();
     }
 
