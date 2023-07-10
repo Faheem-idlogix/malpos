@@ -118,20 +118,23 @@ class TdSaleOrderController extends Controller
         $orderDetails->save();
     }
 
-    foreach ($request->paidAmount as $item) {
-        $paymentDetails = new TdPaymentDetail();
+    if ($request->has('paidAmount') && is_array($request->paidAmount)) {
+        foreach ($request->paidAmount as $item) {
+            $paymentDetails = new TdPaymentDetail();
 
-        $paymentDetails->tender_type = $item['tender_type'];
-        $paymentDetails->payment_amount = $item['payment_amount'];
-        $paymentDetails->cd_client_id = '1';
-        $paymentDetails->cd_brand_id = '1';
-        $paymentDetails->cd_branch_id = '1';
-        $paymentDetails->is_active = '1';
-        $paymentDetails->created_by = '1';
-        $paymentDetails->updated_by = '1';
-        $paymentDetails->td_sale_order_id = $latestOrderId;
-        $paymentDetails->save();
+            $paymentDetails->tender_type = $item['tender_type'];
+            $paymentDetails->payment_amount = $item['payment_amount'];
+            $paymentDetails->cd_client_id = '1';
+            $paymentDetails->cd_brand_id = '1';
+            $paymentDetails->cd_branch_id = '1';
+            $paymentDetails->is_active = '1';
+            $paymentDetails->created_by = '1';
+            $paymentDetails->updated_by = '1';
+            $paymentDetails->td_sale_order_id = $latestOrderId;
+            $paymentDetails->save();
+        }
     }
+
 
     return response()->json($data);
 }
