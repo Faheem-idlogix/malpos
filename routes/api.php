@@ -12,6 +12,8 @@ use App\Http\Controllers\MdProductController;
 use App\Http\Controllers\TdSaleOrderController;
 use App\Http\Controllers\TdTaxCategoryController;
 use App\Http\Controllers\TdTaxRateController;
+use App\Http\Controllers\CdRoleController;
+
 
 
 
@@ -73,6 +75,16 @@ Route::post('user_update/{id}', [UserController::class, 'update'])->name('user_u
 Route::get('user_edit/{id}', [UserController::class, 'edit'])->name('user_edit');
 Route::delete('user_delete/{id}', [UserController::class, 'destroy'])->name('user_delete');
 Route::post('user_login', [UserController::class, 'loginUser'])->name('user_login');
+
+Route::post('role_store', [CdRoleController::class, 'store'])->name('role_store');
+Route::get('admin_roles', [CdRoleController::class, 'index'])->name('admin_roles');
+Route::get('role_edit/{id}', [CdRoleController::class, 'edit'])->name('role_edit');
+Route::post('role_update/{id}', [CdRoleController::class, 'update'])->name('role_update');
+Route::delete('role_delete/{id}', [CdRoleController::class, 'destroy'])->name('role_delete');
+
+
+
+
 
 Route::post('store_pin', [UserController::class, 'storePin'])->name('store_pin');
 Route::post('check_pin', [UserController::class, 'checkPin'])->name('check_pin');

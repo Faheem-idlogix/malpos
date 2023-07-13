@@ -136,7 +136,7 @@ class TdSaleOrderController extends Controller
     }
 
 
-    return response()->json($data);
+    return response()->json(['order'=>$data, 'product'=>$orderDetails, 'payment'=>$paymentDetails]);
 }
 
 
