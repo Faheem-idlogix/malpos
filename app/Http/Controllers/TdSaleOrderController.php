@@ -85,6 +85,8 @@ class TdSaleOrderController extends Controller
     $data->order_type = $request->order_type;
     $data->payment_type = $request->payment_type;
     $data->order_amount = $request->order_amount;
+    $data->cancel_reason = $request->cancel_reason;
+    $data->cancel_comment = $request->cancel_comment;
     $data->time = $currentDateTime;
     $data->user_id = '1';
     $data->discount = $request->discount;

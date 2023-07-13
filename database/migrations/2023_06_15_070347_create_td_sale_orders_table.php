@@ -22,6 +22,8 @@ return new class extends Migration
             $table->dateTime('time')->nullable();
             $table->string('discount')->nullable();
             $table->string('card_no')->nullable();
+            $table->string('cancel_reason')->nullable();
+            $table->string('cancel_comment')->nullable();
             $table->string('card_holder_name')->nullable();
             $table->foreignId('user_id')->on('users')->nullable();
             $table->string('order_amount')->nullable();
