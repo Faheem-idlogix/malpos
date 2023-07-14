@@ -23,7 +23,7 @@ class UserController extends Controller
      public function index()
      {
          //
-         $data =  User::all();
+         $data =  User::with('role')->get();
          return response()->json($data);
      }
 
@@ -70,7 +70,7 @@ class UserController extends Controller
       */
      public function edit( $id)
      {
-         $data = User::find($id);
+         $data = User::with('role')->where('id',$id)->get();
          return response()->json($data);
      }
 

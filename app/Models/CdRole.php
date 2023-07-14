@@ -11,5 +11,6 @@ class CdRole extends Model
 
     protected $primaryKey = 'cd_role_id';
     protected $guarded = ['cd_role_id'];
+    
 
 }
