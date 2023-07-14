@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('td_currencies', function (Blueprint $table) {
             $table->id('td_currency_id');
-            $table->foreignId('gd_country_id')->on('gd_countries');
+            $table->string('country');
             $table->string('currency_type');
             $table->timestamps();
         });

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('md_bank_accounts', function (Blueprint $table) {
             $table->id('md_bank_account_id');
-            $table->string('name');
+            $table->string('bank_account_id');
+            $table->string('tender_type');
             $table->timestamps();
         });
     }

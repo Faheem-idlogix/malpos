@@ -14,6 +14,8 @@ use App\Http\Controllers\TdTaxCategoryController;
 use App\Http\Controllers\TdTaxRateController;
 use App\Http\Controllers\CdRoleController;
 use App\Http\Controllers\MdBankController;
+use App\Http\Controllers\MdBankAccountController;
+use App\Http\Controllers\TdCurrencyController;
 
 
 
@@ -90,7 +92,17 @@ Route::post('bank_update/{id}', [MdBankController::class, 'update'])->name('bank
 Route::get('bank_edit/{id}', [MdBankController::class, 'edit'])->name('bank_edit');
 Route::delete('bank_delete/{id}', [MdBankController::class, 'destroy'])->name('bank_delete');
 
+Route::get('currency', [MdBankAccountController::class, 'index'])->name('bank_account');
+Route::post('bank_account_store', [MdBankAccountController::class, 'store'])->name('bank_account_store');
+Route::post('bank_account_update/{id}', [MdBankAccountController::class, 'update'])->name('bank_account_update');
+Route::get('bank_account_edit/{id}', [MdBankAccountController::class, 'edit'])->name('bank_account_edit');
+Route::delete('bank_account_delete/{id}', [MdBankAccountController::class, 'destroy'])->name('bank_account_delete');
 
+Route::get('currency', [TdCurrencyController::class, 'index'])->name('currency');
+Route::post('currency_store', [TdCurrencyController::class, 'store'])->name('currency_store');
+Route::post('currency_update/{id}', [TdCurrencyController::class, 'update'])->name('currency_update');
+Route::get('currency_edit/{id}', [TdCurrencyController::class, 'edit'])->name('currency_edit');
+Route::delete('currency_delete/{id}', [TdCurrencyController::class, 'destroy'])->name('currency_delete');
 
 
 

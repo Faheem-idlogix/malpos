@@ -13,6 +13,8 @@ class TdCurrencyController extends Controller
     public function index()
     {
         //
+        $data = TdCurrency::all();
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -29,6 +31,12 @@ class TdCurrencyController extends Controller
     public function store(Request $request)
     {
         //
+        $data =new TdCurrency();
+        $data->country = $request['country'];
+        $data->currency_type = $request['currency_type'];
+
+         $data->save();
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -42,24 +50,37 @@ class TdCurrencyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TdCurrency $tdCurrency)
+    public function edit( $id)
     {
         //
+        $data = TdCurrency::find($id);
+        return response()->json(['data' => $data]);
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TdCurrency $tdCurrency)
+    public function update(Request $request,  $id)
     {
         //
+        $data = TdCurrency::find($id);
+        $data->country = $request['country'];
+        $data->currency_type = $request['currency_type'];
+
+         $data->save();
+        return response()->json(['data' => $data]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TdCurrency $tdCurrency)
+    public function destroy( $id)
     {
         //
+        $data = TdCurrency::find($id);
+        $data->delete();
+        return response()->json(['data' => $data]);
     }
 }
