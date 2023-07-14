@@ -13,6 +13,8 @@ class MdBankController extends Controller
     public function index()
     {
         //
+        $data = MdBank::all();
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -29,6 +31,10 @@ class MdBankController extends Controller
     public function store(Request $request)
     {
         //
+        $data =new MdBank();
+        $data->name = $request['name'];
+         $data->save();
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -42,24 +48,35 @@ class MdBankController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MdBank $mdBank)
+    public function edit( $id)
     {
         //
+        $data = MdBank::find($id);
+        return response()->json(['data' => $data]);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MdBank $mdBank)
+    public function update(Request $request,  $id)
     {
         //
+        $data = MdBank::find($id);
+        $data->name = $request['name'];
+         $data->save();
+        return response()->json(['data' => $data]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MdBank $mdBank)
+    public function destroy( $id)
     {
         //
+        $data = MdBank::find($id);
+        $data->delete();
+        return response()->json(['data' => $data]);
+
     }
 }

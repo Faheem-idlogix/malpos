@@ -82,7 +82,7 @@ class CdRoleSeeder extends Seeder
                 'created_by' => '1',
                 'updated_by' => '1',
             ],
-            // New roles
+            // Clients roles
             [
                 'name' => 'User Management',
                 'description' => 'User Management',

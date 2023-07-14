@@ -13,6 +13,8 @@ use App\Http\Controllers\TdSaleOrderController;
 use App\Http\Controllers\TdTaxCategoryController;
 use App\Http\Controllers\TdTaxRateController;
 use App\Http\Controllers\CdRoleController;
+use App\Http\Controllers\MdBankController;
+
 
 
 
@@ -81,6 +83,12 @@ Route::get('admin_roles', [CdRoleController::class, 'index'])->name('admin_roles
 Route::get('role_edit/{id}', [CdRoleController::class, 'edit'])->name('role_edit');
 Route::post('role_update/{id}', [CdRoleController::class, 'update'])->name('role_update');
 Route::delete('role_delete/{id}', [CdRoleController::class, 'destroy'])->name('role_delete');
+
+Route::get('banks', [MdBankController::class, 'index'])->name('banks');
+Route::post('bank_store', [MdBankController::class, 'store'])->name('bank_store');
+Route::post('bank_update/{id}', [MdBankController::class, 'update'])->name('bank_update');
+Route::get('bank_edit/{id}', [MdBankController::class, 'edit'])->name('bank_edit');
+Route::delete('bank_delete/{id}', [MdBankController::class, 'destroy'])->name('bank_delete');
 
 
 
