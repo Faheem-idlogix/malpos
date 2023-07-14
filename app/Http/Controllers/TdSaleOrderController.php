@@ -121,6 +121,7 @@ class TdSaleOrderController extends Controller
     }
 
     if ($request->has('paidAmount') && is_array($request->paidAmount)) {
+        return 'true';
         foreach ($request->paidAmount as $item) {
             $paymentDetails = new TdPaymentDetail();
 
