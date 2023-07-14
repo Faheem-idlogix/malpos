@@ -75,6 +75,7 @@ class TdSaleOrderController extends Controller
 
     public function store(Request $request)
 {
+    return $request;
 
     $currentTimestamp = time();
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
