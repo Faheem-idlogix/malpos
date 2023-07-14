@@ -40,6 +40,8 @@ class TdCurrencyController extends Controller
         $data->is_active = $request->is_active;
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
+        $data->description = $request->description;
+
          $data->save();
         return response()->json(['data' => $data]);
     }
@@ -79,6 +81,8 @@ class TdCurrencyController extends Controller
         $data->is_active = $request->is_active;
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
+        $data->description = $request->description;
+
 
          $data->save();
         return response()->json(['data' => $data]);

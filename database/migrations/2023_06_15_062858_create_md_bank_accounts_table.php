@@ -21,6 +21,8 @@ return new class extends Migration
             $table->boolean('is_active');
             $table->string('created_by');
             $table->string('updated_by');
+            $table->string('description');
+
             $table->timestamps();
         });
     }
