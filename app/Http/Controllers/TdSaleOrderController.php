@@ -178,6 +178,8 @@ class TdSaleOrderController extends Controller
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
         $data->order_amount = $request->order_amount;
+        $data->cancel_reason = $request->cancel_reason;
+        $data->cancel_comment = $request->cancel_comment;
         $data->user_id = '1';
         $data->discount = $request->discount;
         $data->cd_client_id = '1';
@@ -234,6 +236,8 @@ class TdSaleOrderController extends Controller
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
         $data->order_amount = $request->order_amount;
+        $data->cancel_reason = $request->cancel_reason;
+        $data->cancel_comment = $request->cancel_comment;
         $data->card_no = $request->card_no;
         $data->card_holder_name = $request->card_holder_name;
         $data->user_id = '1';
