@@ -32,7 +32,13 @@ class MdBankController extends Controller
     {
         //
         $data =new MdBank();
-        $data->name = $request['name'];
+        $data->name = $request->name;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
          $data->save();
         return response()->json(['data' => $data]);
     }
@@ -63,7 +69,13 @@ class MdBankController extends Controller
     {
         //
         $data = MdBank::find($id);
-        $data->name = $request['name'];
+        $data->name = $request->name;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
          $data->save();
         return response()->json(['data' => $data]);
     }

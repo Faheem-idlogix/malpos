@@ -32,9 +32,14 @@ class TdCurrencyController extends Controller
     {
         //
         $data =new TdCurrency();
-        $data->country = $request['country'];
-        $data->currency_type = $request['currency_type'];
-
+        $data->country = $request->country;
+        $data->currency_type = $request->currency_type;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
          $data->save();
         return response()->json(['data' => $data]);
     }
@@ -66,8 +71,14 @@ class TdCurrencyController extends Controller
     {
         //
         $data = TdCurrency::find($id);
-        $data->country = $request['country'];
-        $data->currency_type = $request['currency_type'];
+        $data->country = $request->country;
+        $data->currency_type = $request->currency_type;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
 
          $data->save();
         return response()->json(['data' => $data]);

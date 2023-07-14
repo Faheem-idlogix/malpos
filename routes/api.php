@@ -92,7 +92,7 @@ Route::post('bank_update/{id}', [MdBankController::class, 'update'])->name('bank
 Route::get('bank_edit/{id}', [MdBankController::class, 'edit'])->name('bank_edit');
 Route::delete('bank_delete/{id}', [MdBankController::class, 'destroy'])->name('bank_delete');
 
-Route::get('currency', [MdBankAccountController::class, 'index'])->name('bank_account');
+Route::get('bank_account', [MdBankAccountController::class, 'index'])->name('bank_account');
 Route::post('bank_account_store', [MdBankAccountController::class, 'store'])->name('bank_account_store');
 Route::post('bank_account_update/{id}', [MdBankAccountController::class, 'update'])->name('bank_account_update');
 Route::get('bank_account_edit/{id}', [MdBankAccountController::class, 'edit'])->name('bank_account_edit');

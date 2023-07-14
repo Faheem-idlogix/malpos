@@ -32,8 +32,14 @@ class MdBankAccountController extends Controller
     {
         //
         $data =new MdBankAccount();
-        $data->bank_account_id = $request['bank_account_id'];
-        $data->tender_type = $request['tender_type'];
+        $data->bank_account_id = $request->bank_account_id;
+        $data->tender_type = $request->tender_type;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
 
          $data->save();
         return response()->json(['data' => $data]);
@@ -65,8 +71,14 @@ class MdBankAccountController extends Controller
     {
         //
         $data = MdBankAccount::find($id);
-        $data->bank_account_id = $request['bank_account_id'];
-        $data->tender_type = $request['tender_type'];
+        $data->bank_account_id = $request->bank_account_id;
+        $data->tender_type = $request->tender_type;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active;
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
 
          $data->save();
         return response()->json(['data' => $data]);
