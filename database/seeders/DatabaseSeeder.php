@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CdClientSeeder::class);
         $this->call(CdBrandSeeder::class);
         $this->call(CdBranchSeeder::class);
+        $this->call(GdCountrySeeder::class);
         $this->call(CdRoleSeeder::class);
         $this->call(UserSeeder::class);
 

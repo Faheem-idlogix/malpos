@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gd_countries', function (Blueprint $table) {
-            $table->id('gd_country_id');
-            $table->string('gd_country_code')->unique;
-           $table->string('country_name');
+        Schema::create('td_currencies', function (Blueprint $table) {
+            $table->id('td_currency_id');
+            $table->foreignId('gd_country_id')->on('gd_countries');
+            $table->string('currency_type');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gd_countries');
+        Schema::dropIfExists('td_currencies');
     }
 };

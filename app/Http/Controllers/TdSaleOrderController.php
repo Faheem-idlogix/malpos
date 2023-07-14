@@ -231,7 +231,7 @@ class TdSaleOrderController extends Controller
 
         $data = TdSaleOrder::findOrFail($orderId);
         $data->customer = 'Admin';
-        $data->status = 'paid';
+        $data->status = $request->status;
         $data->src = 'null';
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
