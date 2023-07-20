@@ -16,6 +16,15 @@ return new class extends Migration
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
+            $table->string('request_by');
+            $table->string('request_no');
+            $table->string('represenetative');
+            $table->string('date_of_request');
+            $table->string('date_of_completion');
+            $table->string('status');
+            $table->string('request_types');
+            $table->string('city');
+            $table->string('country');
             $table->boolean('is_active');
             $table->string('created_by');
             $table->string('updated_by');
