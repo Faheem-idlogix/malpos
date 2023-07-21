@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('product_category_name');
             $table->string('product_category_description')->nullable();
             $table->string('product_category_image');
+            $table->foreignId('td_tax_category_id')->on('td_tax_categories');
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');

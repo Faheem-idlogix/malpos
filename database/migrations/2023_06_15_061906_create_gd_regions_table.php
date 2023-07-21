@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('gd_regions', function (Blueprint $table) {
             $table->id('gd_region_id');
-            $table->foreignId('cd_client_id')->on('cd_clients');
-            $table->foreignId('cd_brand_id')->on('cd_brands');
-            $table->foreignId('cd_branch_id')->on('cd_branchs');
-            $table->boolean('is_active');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->foreignId('gd_country_id')->on('gd_countries');
+            $table->string('name');
+            $table->string('code');
             $table->timestamps();
         });
     }

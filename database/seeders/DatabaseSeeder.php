@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\CdRole;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CdBranchSeeder::class);
         $this->call(GdCountrySeeder::class);
         $this->call(CdRoleSeeder::class);
+        $this->call(GdCountrySeeder::class);
         $this->call(UserSeeder::class);
 
 

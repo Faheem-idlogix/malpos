@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('valid_form');
             $table->string('type');
             $table->string('rate');
+            $table->foreignId('gd_country_id')->on('gd_countries');
+            $table->foreignId('gd_region_id')->on('gd_regions');
+
             $table->timestamps();
         });
     }
