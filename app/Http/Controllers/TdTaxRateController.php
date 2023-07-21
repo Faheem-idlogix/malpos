@@ -46,6 +46,8 @@ class TdTaxRateController extends Controller
         $data->valid_form = $request->valid_form;
         $data->type = $request->type;
         $data->rate = $request->rate;
+        $data->gd_country_id = $request->gd_country_id;
+        $data->gd_region_id = $request->gd_region_id;
         $data->save();
         return response()->json($data);
 
@@ -85,6 +87,8 @@ class TdTaxRateController extends Controller
         $data->valid_form = $request->valid_form;
         $data->type = $request->type;
         $data->rate = $request->rate;
+        $data->gd_country_id = $request->gd_country_id;
+        $data->gd_region_id = $request->gd_region_id;
         $data->save();
         return response()->json($data);
     }
