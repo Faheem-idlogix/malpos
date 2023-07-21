@@ -10,9 +10,11 @@ class GdRegionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
         //
+        $data =  GdRegion::where('gd_country_id', $id)->get();
+        return response()->json($data);
     }
 
     /**

@@ -13,6 +13,8 @@ class GdCountryController extends Controller
     public function index()
     {
         //
+        $data =  GdCountry::all();
+        return response()->json($data);
     }
 
     /**

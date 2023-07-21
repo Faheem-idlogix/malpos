@@ -106,6 +106,8 @@ Route::post('currency_update/{id}', [TdCurrencyController::class, 'update'])->na
 Route::get('currency_edit/{id}', [TdCurrencyController::class, 'edit'])->name('currency_edit');
 Route::delete('currency_delete/{id}', [TdCurrencyController::class, 'destroy'])->name('currency_delete');
 
+Route::get('get_country', [GdCountryController::class, 'index'])->name('get_country');
+Route::get('get_region/{id}', [GdRegionController::class, 'index'])->name('get_region');
 
 
 Route::post('store_pin', [UserController::class, 'storePin'])->name('store_pin');
