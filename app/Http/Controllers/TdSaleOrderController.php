@@ -6,8 +6,7 @@ use App\Models\TdSaleOrder;
 use Illuminate\Http\Request;
 use App\Models\TdSaleOrderItem;
 use App\Models\TdPaymentDetail;
-
-
+use App\Models\TdPaymentTransaction;
 
 class TdSaleOrderController extends Controller
 {
@@ -103,6 +102,22 @@ class TdSaleOrderController extends Controller
     $orderId = $latestOrderId;
 
     $orderDetails['td_sale_order_id'] = $orderId;
+
+    // $payment_transaction = new TdPaymentTransaction();
+
+    // $payment_transaction->description = $description;
+    // $payment_transaction->qty = $product['qty'];
+    // $payment_transaction->price = $product['price'];
+    // $payment_transaction->cd_client_id = '1';
+    // $payment_transaction->cd_brand_id = '1';
+    // $payment_transaction->cd_branch_id = '1';
+    // $payment_transaction->is_active = '1';
+    // $payment_transaction->created_by = '1';
+    // $payment_transaction->updated_by = '1';
+    // $payment_transaction->td_sale_order_id = $latestOrderId;
+    // $payment_transaction->save();
+
+
 
     foreach ($request->products as $product) {
         $orderDetails = new TdSaleOrderItem();

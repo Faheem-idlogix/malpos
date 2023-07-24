@@ -16,6 +16,12 @@ return new class extends Migration
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
+            $table->string('description')->nullable();
+            $table->string('discount amount');
+            $table->date('date_of_transactions');
+            $table->string('payment_amount_receipt');
+            $table->foreignId('td_payment_detail_id')->on('td_payment_details');
+            $table->foreignId('td_sale_order_id')->on('td_sale_orders');
             $table->boolean('is_active');
             $table->string('created_by');
             $table->string('updated_by');

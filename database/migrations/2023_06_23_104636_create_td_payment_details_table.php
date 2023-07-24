@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('td_payment_detail_id');
             $table->string('tender_type');
             $table->string('payment_amount');
+            $table->foreignId('td_payment_transaction_id')->on('td_payment_transactions');
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->date('date_promised')->nullable();
             $table->string('credit_card')->nullable();
             $table->string('credit_card_number')->nullable();
+            $table->string('order_type')->nullable();
             $table->boolean('is_active')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
