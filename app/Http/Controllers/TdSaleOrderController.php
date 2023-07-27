@@ -77,49 +77,48 @@ class TdSaleOrderController extends Controller
     $currentTimestamp = time();
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
     foreach ($request->orders as $order) {
-    $data = new TdSaleOrder();
-    $data->customer = 'Admin';
-    $data->status = $order['status'];
-    $data->src = 'null';
-    $data->order_type = $order['order_type'];
-    $data->payment_type = $order['payment_type'];
-    $data->order_amount = $order['order_amount'];
-    $data->cancel_reason = $order['cancel_reason'];
-    $data->cancel_comment = $order['cancel_comment'];
-    $data->seat_no = $order['seat_no'];
-    $data->parent_order = $order['parent_order'];
-    $data->time = $currentDateTime;
-    $data->user_id = '1';
-    $data->discount = $order['discount'];
-    $data->td_sale_order_code = $data->TdSaleOrderCode();
-    $data->cd_client_id = '1';
-    $data->cd_brand_id = '1';
-    $data->cd_branch_id = '1';
-    $data->is_active = '1';
-    $data->created_by = '1';
-    $data->updated_by = '1';
-    $data->save();
+        $data = new TdSaleOrder();
+        $data->customer = 'Admin';
+        $data->status = $order['status'];
+        $data->src = 'null';
+        $data->order_type = $order['order_type'];
+        $data->payment_type = $order['payment_type'];
+        $data->order_amount = $order['order_amount'];
+        $data->cancel_reason = $order['cancel_reason'];
+        $data->cancel_comment = $order['cancel_comment'];
+        $data->seat_no = $order['seat_no'];
+        $data->parent_order = $order['parent_order'];
+        $data->time = $currentDateTime;
+        $data->user_id = '1';
+        $data->discount = $order['discount'];
+        $data->td_sale_order_code = $data->TdSaleOrderCode();
+        $data->cd_client_id = '1';
+        $data->cd_brand_id = '1';
+        $data->cd_branch_id = '1';
+        $data->is_active = '1';
+        $data->created_by = '1';
+        $data->updated_by = '1';
+        $data->save();
 
-    $latestOrderId = TdSaleOrder::latest('td_sale_order_id')->pluck('td_sale_order_id')->first();
-    $orderId = $latestOrderId;
-    $orderDetails['td_sale_order_id'] = $orderId;
+        $latestOrderId = $data->td_sale_order_id;
 
-    foreach ($request->products as $product) {
-        $orderDetails = new TdSaleOrderItem();
+        foreach ($order['products'] as $product) {
+            $orderDetails = new TdSaleOrderItem();
 
-        $orderDetails->md_product_id = $product['md_product_id'];
-        $orderDetails->qty = $product['qty'];
-        $orderDetails->price = $product['price'];
-        $orderDetails->cd_client_id = '1';
-        $orderDetails->cd_brand_id = '1';
-        $orderDetails->cd_branch_id = '1';
-        $orderDetails->is_active = '1';
-        $orderDetails->created_by = '1';
-        $orderDetails->updated_by = '1';
-        $orderDetails->td_sale_order_id = $latestOrderId;
-        $orderDetails->save();
+            $orderDetails->md_product_id = $product['md_product_id'];
+            $orderDetails->qty = $product['qty'];
+            $orderDetails->price = $product['price'];
+            $orderDetails->cd_client_id = '1';
+            $orderDetails->cd_brand_id = '1';
+            $orderDetails->cd_branch_id = '1';
+            $orderDetails->is_active = '1';
+            $orderDetails->created_by = '1';
+            $orderDetails->updated_by = '1';
+            $orderDetails->td_sale_order_id = $latestOrderId;
+            $orderDetails->save();
+        }
     }
-    }
+
 
 
 
