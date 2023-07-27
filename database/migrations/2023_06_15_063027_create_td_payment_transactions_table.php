@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
             $table->string('description')->nullable();
-            $table->string('discount_amount');
+            $table->string('discount_amount')->nullable();
             $table->date('date_of_transactions');
             $table->string('payment_amount_receipt');
             $table->foreignId('td_sale_order_id')->on('td_sale_orders');
