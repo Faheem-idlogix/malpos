@@ -74,9 +74,9 @@ class TdSaleOrderController extends Controller
 
     public function store(Request $request)
 {
-
     $currentTimestamp = time();
     $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
+    foreach ($request->orders as $order) {
     $data = new TdSaleOrder();
     $data->customer = 'Admin';
     $data->status = $request->status;
@@ -97,25 +97,14 @@ class TdSaleOrderController extends Controller
     $data->created_by = '1';
     $data->updated_by = '1';
     $data->save();
+    }
 
     $latestOrderId = TdSaleOrder::latest('td_sale_order_id')->pluck('td_sale_order_id')->first();
+
     $orderId = $latestOrderId;
 
     $orderDetails['td_sale_order_id'] = $orderId;
 
-    // $payment_transaction = new TdPaymentTransaction();
-
-    // $payment_transaction->description = $description;
-    // $payment_transaction->qty = $product['qty'];
-    // $payment_transaction->price = $product['price'];
-    // $payment_transaction->cd_client_id = '1';
-    // $payment_transaction->cd_brand_id = '1';
-    // $payment_transaction->cd_branch_id = '1';
-    // $payment_transaction->is_active = '1';
-    // $payment_transaction->created_by = '1';
-    // $payment_transaction->updated_by = '1';
-    // $payment_transaction->td_sale_order_id = $latestOrderId;
-    // $payment_transaction->save();
 
 
 
@@ -135,12 +124,29 @@ class TdSaleOrderController extends Controller
         $orderDetails->save();
     }
 
+    foreach ($request->payment_transactions as $payment_transaction) {
+        $paymentTransaction = new TdPaymentTransaction();
+        $paymentTransaction->discount_amount = $payment_transaction['discount_amount'];
+        $paymentTransaction->date_of_transactions = $payment_transaction['date_of_transactions'];
+        $paymentTransaction->payment_amount_receipt = $payment_transaction['payment_amount_receipt'];
+        $paymentTransaction->cd_client_id = '1';
+        $paymentTransaction->cd_brand_id = '1';
+        $paymentTransaction->cd_branch_id = '1';
+        $paymentTransaction->is_active = '1';
+        $paymentTransaction->created_by = '1';
+        $paymentTransaction->updated_by = '1';
+        $paymentTransaction->td_sale_order_id = $latestOrderId;
+        $paymentTransaction->save();
+    }
+    $paymentTransactionId = TdPaymentTransaction::latest('td_payment_transaction_id')->pluck('td_payment_transaction_id')->first();
+
+
     if ($request->has('paidAmount') && is_array($request->paidAmount)) {
         foreach ($request->paidAmount as $item) {
             $paymentDetails = new TdPaymentDetail();
-
             $paymentDetails->tender_type = $item['tender_type'];
             $paymentDetails->payment_amount = $item['payment_amount'];
+            $paymentDetails->td_payment_transaction_id = $paymentTransactionId;
             $paymentDetails->cd_client_id = '1';
             $paymentDetails->cd_brand_id = '1';
             $paymentDetails->cd_branch_id = '1';
@@ -151,7 +157,7 @@ class TdSaleOrderController extends Controller
             $paymentDetails->save();
         }
     }
-       $order = TdSaleOrder::with('td_sale_order_item','td_payment_detail')->where('td_sale_order_id',$latestOrderId)->get();
+       $order = TdSaleOrder::with('td_sale_order_item','td_payment_transaction','td_payment_detail')->where('td_sale_order_id',$latestOrderId)->get();
     return response()->json(['order'=>$order]);
 }
 

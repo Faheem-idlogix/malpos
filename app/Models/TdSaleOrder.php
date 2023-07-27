@@ -30,6 +30,10 @@ class TdSaleOrder extends Model
         return $this->hasMany(TdPaymentDetail::class, 'td_sale_order_id');
     }
 
+    public function td_payment_transaction(){
+        return $this->hasMany(TdPaymentTransaction::class, 'td_sale_order_id');
+    }
+
     public function TdSaleOrderCode()
     {
         $check = TdSaleOrder::where('td_sale_order_code','like','%#%' )->latest()->first()->td_sale_order_code ?? null;

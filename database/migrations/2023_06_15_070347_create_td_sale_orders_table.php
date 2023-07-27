@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('cancel_reason')->nullable();
             $table->string('cancel_comment')->nullable();
             $table->string('card_holder_name')->nullable();
+            $table->string('seat_no')->nullable();
+            $table->string('parent_order')->nullable();
             $table->foreignId('user_id')->on('users')->nullable();
             $table->string('order_amount')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
