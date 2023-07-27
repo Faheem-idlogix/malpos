@@ -155,7 +155,7 @@ class TdSaleOrderController extends Controller
     //         $paymentDetails->save();
     //     }
     // }
-       $order = TdSaleOrder::with('td_sale_order_item','td_payment_transaction','td_payment_detail')->where('td_sale_order_id',$latestOrderId)->get();
+       $order = TdSaleOrder::with('td_sale_order_item')->where('td_sale_order_id',$latestOrderId)->get();
     return response()->json(['order'=>$order]);
 }
 
