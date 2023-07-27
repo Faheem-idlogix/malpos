@@ -79,16 +79,18 @@ class TdSaleOrderController extends Controller
     foreach ($request->orders as $order) {
     $data = new TdSaleOrder();
     $data->customer = 'Admin';
-    $data->status = $request->status;
+    $data->status = $order['status'];
     $data->src = 'null';
-    $data->order_type = $request->order_type;
-    $data->payment_type = $request->payment_type;
-    $data->order_amount = $request->order_amount;
-    $data->cancel_reason = $request->cancel_reason;
-    $data->cancel_comment = $request->cancel_comment;
+    $data->order_type = $order['order_type'];
+    $data->payment_type = $order['payment_type'];
+    $data->order_amount = $order['order_amount'];
+    $data->cancel_reason = $order['cancel_reason'];
+    $data->cancel_comment = $order['cancel_comment'];
+    $data->seat_no = $order['seat_no'];
+    $data->parent_order = $order['parent_order'];
     $data->time = $currentDateTime;
     $data->user_id = '1';
-    $data->discount = $request->discount;
+    $data->discount = $order['discount'];
     $data->td_sale_order_code = $data->TdSaleOrderCode();
     $data->cd_client_id = '1';
     $data->cd_brand_id = '1';
@@ -97,16 +99,10 @@ class TdSaleOrderController extends Controller
     $data->created_by = '1';
     $data->updated_by = '1';
     $data->save();
-    }
 
     $latestOrderId = TdSaleOrder::latest('td_sale_order_id')->pluck('td_sale_order_id')->first();
-
     $orderId = $latestOrderId;
-
     $orderDetails['td_sale_order_id'] = $orderId;
-
-
-
 
     foreach ($request->products as $product) {
         $orderDetails = new TdSaleOrderItem();
@@ -123,40 +119,43 @@ class TdSaleOrderController extends Controller
         $orderDetails->td_sale_order_id = $latestOrderId;
         $orderDetails->save();
     }
-
-    foreach ($request->payment_transactions as $payment_transaction) {
-        $paymentTransaction = new TdPaymentTransaction();
-        $paymentTransaction->discount_amount = $payment_transaction['discount_amount'];
-        $paymentTransaction->date_of_transactions = $payment_transaction['date_of_transactions'];
-        $paymentTransaction->payment_amount_receipt = $payment_transaction['payment_amount_receipt'];
-        $paymentTransaction->cd_client_id = '1';
-        $paymentTransaction->cd_brand_id = '1';
-        $paymentTransaction->cd_branch_id = '1';
-        $paymentTransaction->is_active = '1';
-        $paymentTransaction->created_by = '1';
-        $paymentTransaction->updated_by = '1';
-        $paymentTransaction->td_sale_order_id = $latestOrderId;
-        $paymentTransaction->save();
     }
-    $paymentTransactionId = TdPaymentTransaction::latest('td_payment_transaction_id')->pluck('td_payment_transaction_id')->first();
 
 
-    if ($request->has('paidAmount') && is_array($request->paidAmount)) {
-        foreach ($request->paidAmount as $item) {
-            $paymentDetails = new TdPaymentDetail();
-            $paymentDetails->tender_type = $item['tender_type'];
-            $paymentDetails->payment_amount = $item['payment_amount'];
-            $paymentDetails->td_payment_transaction_id = $paymentTransactionId;
-            $paymentDetails->cd_client_id = '1';
-            $paymentDetails->cd_brand_id = '1';
-            $paymentDetails->cd_branch_id = '1';
-            $paymentDetails->is_active = '1';
-            $paymentDetails->created_by = '1';
-            $paymentDetails->updated_by = '1';
-            $paymentDetails->td_sale_order_id = $latestOrderId;
-            $paymentDetails->save();
-        }
-    }
+
+    // foreach ($request->payment_transactions as $payment_transaction) {
+    //     $paymentTransaction = new TdPaymentTransaction();
+    //     $paymentTransaction->discount_amount = $payment_transaction['discount_amount'];
+    //     $paymentTransaction->date_of_transactions = $payment_transaction['date_of_transactions'];
+    //     $paymentTransaction->payment_amount_receipt = $payment_transaction['payment_amount_receipt'];
+    //     $paymentTransaction->cd_client_id = '1';
+    //     $paymentTransaction->cd_brand_id = '1';
+    //     $paymentTransaction->cd_branch_id = '1';
+    //     $paymentTransaction->is_active = '1';
+    //     $paymentTransaction->created_by = '1';
+    //     $paymentTransaction->updated_by = '1';
+    //     $paymentTransaction->td_sale_order_id = $latestOrderId;
+    //     $paymentTransaction->save();
+    // }
+    // $paymentTransactionId = TdPaymentTransaction::latest('td_payment_transaction_id')->pluck('td_payment_transaction_id')->first();
+
+
+    // if ($request->has('paidAmount') && is_array($request->paidAmount)) {
+    //     foreach ($request->paidAmount as $item) {
+    //         $paymentDetails = new TdPaymentDetail();
+    //         $paymentDetails->tender_type = $item['tender_type'];
+    //         $paymentDetails->payment_amount = $item['payment_amount'];
+    //         $paymentDetails->td_payment_transaction_id = $paymentTransactionId;
+    //         $paymentDetails->cd_client_id = '1';
+    //         $paymentDetails->cd_brand_id = '1';
+    //         $paymentDetails->cd_branch_id = '1';
+    //         $paymentDetails->is_active = '1';
+    //         $paymentDetails->created_by = '1';
+    //         $paymentDetails->updated_by = '1';
+    //         $paymentDetails->td_sale_order_id = $latestOrderId;
+    //         $paymentDetails->save();
+    //     }
+    // }
        $order = TdSaleOrder::with('td_sale_order_item','td_payment_transaction','td_payment_detail')->where('td_sale_order_id',$latestOrderId)->get();
     return response()->json(['order'=>$order]);
 }
