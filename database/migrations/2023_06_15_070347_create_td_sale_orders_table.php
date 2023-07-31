@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('td_sale_orders', function (Blueprint $table) {
             $table->id('td_sale_order_id');
-            $table->string('td_sale_order_code')->unique();
+            $table->string('td_sale_order_code')->nullable();
             $table->string('customer')->nullable();
             $table->string('status')->nullable();
             $table->string('src')->nullable();
