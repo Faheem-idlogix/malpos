@@ -250,42 +250,50 @@ class TdSaleOrderController extends Controller
 
     public function checkout(Request $request, $orderId){
 
-        $data = TdSaleOrder::findOrFail($orderId);
-        $data->customer = 'Admin';
-        $data->status = $request->status;
-        $data->src = 'null';
-        $data->order_type = $request->order_type;
-        $data->payment_type = $request->payment_type;
-        $data->order_amount = $request->order_amount;
-        $data->cancel_reason = $request->cancel_reason;
-        $data->cancel_comment = $request->cancel_comment;
-        $data->card_no = $request->card_no;
-        $data->card_holder_name = $request->card_holder_name;
-        $data->user_id = '1';
-        $data->discount = $request->discount;
-        $data->cd_client_id = '1';
-        $data->cd_brand_id = '1';
-        $data->cd_branch_id = '1';
-        $data->is_active = '1';
-        $data->created_by = '1';
-        $data->updated_by = '1';
-        $data->save();
+        $currentTimestamp = time();
+        $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
+        foreach ($request->orders as $order) {
+            $data =  TdSaleOrder::findOrFail($orderId);
+            $data->customer = 'Admin';
+            $data->status = $order['status'];
+            $data->src = 'null';
+            $data->order_type = $order['order_type'];
+            $data->payment_type = $order['payment_type'];
+            $data->order_amount = $order['order_amount'];
+            $data->cancel_reason = $order['cancel_reason'];
+            $data->cancel_comment = $order['cancel_comment'];
+            $data->seat_no = $order['seat_no'];
+            $data->parent_order = $order['parent_order'];
+            $data->time = $currentDateTime;
+            $data->user_id = '1';
+            $data->discount = $order['discount'];
+            $data->td_sale_order_code = $data->TdSaleOrderCode();
+            $data->cd_client_id = '1';
+            $data->cd_brand_id = '1';
+            $data->cd_branch_id = '1';
+            $data->is_active = '1';
+            $data->created_by = '1';
+            $data->updated_by = '1';
+            $data->save();
 
-           foreach ($request->payment_transactions as $payment_transaction) {
-        $paymentTransaction = new TdPaymentTransaction();
-        $paymentTransaction->discount_amount = $payment_transaction['discount_amount'];
-        $paymentTransaction->date_of_transactions = $payment_transaction['date_of_transactions'];
-        $paymentTransaction->payment_amount_receipt = $payment_transaction['payment_amount_receipt'];
-        $paymentTransaction->cd_client_id = '1';
-        $paymentTransaction->cd_brand_id = '1';
-        $paymentTransaction->cd_branch_id = '1';
-        $paymentTransaction->is_active = '1';
-        $paymentTransaction->created_by = '1';
-        $paymentTransaction->updated_by = '1';
-        $paymentTransaction->td_sale_order_id = $orderId;
-        $paymentTransaction->save();
-    }
-    $paymentTransactionId = TdPaymentTransaction::latest('td_payment_transaction_id')->pluck('td_payment_transaction_id')->first();
+            $orderDetailsDelete =  TdSaleOrderItem::where('td_sale_order_id', $orderId)->delete();
+
+            foreach ($order['products'] as $product) {
+                $orderDetails = new TdSaleOrderItem();
+                $orderDetails->md_product_id = $product['md_product_id'];
+                $orderDetails->qty = $product['qty'];
+                $orderDetails->price = $product['price'];
+                $orderDetails->cd_client_id = '1';
+                $orderDetails->cd_brand_id = '1';
+                $orderDetails->cd_branch_id = '1';
+                $orderDetails->is_active = '1';
+                $orderDetails->created_by = '1';
+                $orderDetails->updated_by = '1';
+                $orderDetails->td_sale_order_id = $orderId;
+                $orderDetails->save();
+            }
+        }
+
 
 
     if ($request->has('paidAmount') && is_array($request->paidAmount)) {
@@ -293,7 +301,6 @@ class TdSaleOrderController extends Controller
             $paymentDetails = new TdPaymentDetail();
             $paymentDetails->tender_type = $item['tender_type'];
             $paymentDetails->payment_amount = $item['payment_amount'];
-            $paymentDetails->td_payment_transaction_id = $paymentTransactionId;
             $paymentDetails->cd_client_id = '1';
             $paymentDetails->cd_brand_id = '1';
             $paymentDetails->cd_branch_id = '1';
@@ -304,7 +311,9 @@ class TdSaleOrderController extends Controller
             $paymentDetails->save();
         }
     }
-    return response()->json($data);
+   // return response()->json($data);
+    $order = TdSaleOrder::with('td_sale_order_item','td_payment_detail')->where('td_sale_order_id',$orderId)->get();
+    return response()->json(['order'=>$order]);
 
     }
 
