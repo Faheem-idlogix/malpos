@@ -252,7 +252,7 @@ class TdSaleOrderController extends Controller
 
         $currentTimestamp = time();
         $currentDateTime = date('Y-m-d H:i:s', $currentTimestamp);
- 
+
         $data = TdSaleOrder::findOrFail($orderId);
         $data->customer = 'Admin';
         $data->status = 'paid';
@@ -263,6 +263,7 @@ class TdSaleOrderController extends Controller
         $data->order_amount = $request->order_amount;
         $data->cancel_reason = $request->cancel_reason;
         $data->cancel_comment = $request->cancel_comment;
+        $data->status = $request->status;
         $data->user_id = '1';
         $data->discount = $request->discount;
         $data->cd_client_id = '1';
