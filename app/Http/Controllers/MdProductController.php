@@ -46,7 +46,7 @@ class MdProductController extends Controller
         $data->is_active = $request->is_active;
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
-        $data->td_tax_category_id = $request->td_tax_category_id;
+        $data->td_tax_category_id = $request->td_tax_category_id ?? '1';
 
         if ($image = $request->file('product_image')) {
             $destinationPath = public_path('img/product_image/');
