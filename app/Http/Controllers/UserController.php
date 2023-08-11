@@ -133,6 +133,60 @@ class UserController extends Controller
         return response()->json(['message' => 'Email or password is incorrect'], 401);
     }
 
+    public function loginBrand(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'cd_brand_id' => 'required',
+            'password' => 'required',
+            'token' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 401);
+        }
+
+        if (Auth::attempt($request->only('cd_brand_id', 'password', 'token'))) {
+            $user = Auth::user();
+            $token = $user->createToken('MyApp')->plainTextToken;
+
+            // $auth_user = User::where('cd_brand_id', $request->cd_brand_id)->first();
+            // $auth_user->token = $token;
+            // $auth_user->save();
+
+
+            return response()->json(['token' => $token, 'user' => $user], 200);
+        }
+
+        return response()->json(['message' => 'brand or password is incorrect'], 401);
+    }
+
+    public function loginPin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'pin' => 'required',
+            'token' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 401);
+        }
+
+        if (Auth::attempt($request->only('pin', 'token'))) {
+            $user = Auth::user();
+            $token = $user->createToken('MyApp')->plainTextToken;
+
+            // $auth_user = User::where('pin', $request->pin)->first();
+            // $auth_user->token = $token;
+            // $auth_user->save();
+
+
+            return response()->json(['token' => $token, 'user' => $user], 200);
+        }
+
+        return response()->json(['message' => 'pin or token is incorrect'], 401);
+    }
+
         public function storePin(Request $request)
     {
         $validatedData = $request->validate([

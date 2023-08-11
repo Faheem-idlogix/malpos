@@ -82,6 +82,9 @@ Route::post('user_update/{id}', [UserController::class, 'update'])->name('user_u
 Route::get('user_edit/{id}', [UserController::class, 'edit'])->name('user_edit');
 Route::delete('user_delete/{id}', [UserController::class, 'destroy'])->name('user_delete');
 Route::post('user_login', [UserController::class, 'loginUser'])->name('user_login');
+Route::post('brand_login', [UserController::class, 'loginBrand'])->name('brand_login');
+Route::post('pin_login', [UserController::class, 'loginPin'])->name('pin_login');
+
 
 Route::post('role_store', [CdRoleController::class, 'store'])->name('role_store');
 Route::get('admin_roles', [CdRoleController::class, 'index'])->name('admin_roles');

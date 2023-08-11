@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('md_product_id')->on('md_products');
             $table->string('qty')->nullable();
             $table->string('price')->nullable();
+            $table->string('comment')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');

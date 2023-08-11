@@ -83,6 +83,8 @@ class TdSaleOrderController extends Controller
         $data->src = 'null';
         $data->order_type = $order['order_type'];
         $data->payment_type = $order['payment_type'];
+        $data->split_type = $order['split_type'];;
+
         $data->order_amount = $order['order_amount'];
         $data->cancel_reason = $order['cancel_reason'];
         $data->cancel_comment = $order['cancel_comment'];
@@ -108,6 +110,7 @@ class TdSaleOrderController extends Controller
             $orderDetails->md_product_id = $product['md_product_id'];
             $orderDetails->qty = $product['qty'];
             $orderDetails->price = $product['price'];
+            $orderDetails->comment = $product['comment'];
             $orderDetails->cd_client_id = '1';
             $orderDetails->cd_brand_id = '1';
             $orderDetails->cd_branch_id = '1';
@@ -196,6 +199,7 @@ class TdSaleOrderController extends Controller
         $data->time = $currentDateTime;
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
+        $data->split_type = $request->split_type;
         $data->order_amount = $request->order_amount;
         $data->cancel_reason = $request->cancel_reason;
         $data->cancel_comment = $request->cancel_comment;
@@ -260,6 +264,8 @@ class TdSaleOrderController extends Controller
         $data->time = $currentDateTime;
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
+        $data->split_type = $request->split_type;
+
         $data->order_amount = $request->order_amount;
         $data->cancel_reason = $request->cancel_reason;
         $data->cancel_comment = $request->cancel_comment;
