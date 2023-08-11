@@ -84,7 +84,7 @@ class TdSaleOrderController extends Controller
         $data->order_type = $order['order_type'];
         $data->payment_type = $order['payment_type'];
         $data->split_type = $order['split_type'];;
-
+        $data->table_no = $order['table_no'];;
         $data->order_amount = $order['order_amount'];
         $data->cancel_reason = $order['cancel_reason'];
         $data->cancel_comment = $order['cancel_comment'];
@@ -200,6 +200,7 @@ class TdSaleOrderController extends Controller
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
         $data->split_type = $request->split_type;
+        $data->table_no = $request->table_no;
         $data->order_amount = $request->order_amount;
         $data->cancel_reason = $request->cancel_reason;
         $data->cancel_comment = $request->cancel_comment;
@@ -265,6 +266,7 @@ class TdSaleOrderController extends Controller
         $data->order_type = $request->order_type;
         $data->payment_type = $request->payment_type;
         $data->split_type = $request->split_type;
+        $data->table_no = $request->table_no;
 
         $data->order_amount = $request->order_amount;
         $data->cancel_reason = $request->cancel_reason;
