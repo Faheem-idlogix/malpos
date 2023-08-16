@@ -18,6 +18,7 @@ use App\Http\Controllers\MdBankAccountController;
 use App\Http\Controllers\TdCurrencyController;
 use App\Http\Controllers\GdCountryController;
 use App\Http\Controllers\GdRegionController;
+use App\Http\Controllers\MdStationController;
 
 
 
@@ -105,6 +106,13 @@ Route::post('bank_account_store', [MdBankAccountController::class, 'store'])->na
 Route::post('bank_account_update/{id}', [MdBankAccountController::class, 'update'])->name('bank_account_update');
 Route::get('bank_account_edit/{id}', [MdBankAccountController::class, 'edit'])->name('bank_account_edit');
 Route::delete('bank_account_delete/{id}', [MdBankAccountController::class, 'destroy'])->name('bank_account_delete');
+
+Route::get('station', [MdStationController::class, 'index'])->name('station');
+Route::post('station_store', [MdStationController::class, 'store'])->name('station_store');
+Route::post('station_update/{id}', [MdStationController::class, 'update'])->name('station_update');
+Route::get('station_edit/{id}', [MdStationController::class, 'edit'])->name('station_edit');
+Route::delete('station_delete/{id}', [MdStationController::class, 'destroy'])->name('station_delete');
+
 
 Route::get('currency', [TdCurrencyController::class, 'index'])->name('currency');
 Route::post('currency_store', [TdCurrencyController::class, 'store'])->name('currency_store');

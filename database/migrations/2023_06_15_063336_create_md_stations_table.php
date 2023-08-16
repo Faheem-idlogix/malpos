@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('md_stations', function (Blueprint $table) {
             $table->id('md_station_id');
+            $table->string('station_name');
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');

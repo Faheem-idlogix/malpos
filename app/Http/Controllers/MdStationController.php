@@ -13,6 +13,8 @@ class MdStationController extends Controller
     public function index()
     {
         //
+        $data = MdStation::all();
+        return response()->json($data);
     }
 
     /**
@@ -29,6 +31,17 @@ class MdStationController extends Controller
     public function store(Request $request)
     {
         //
+        $data = new MdStation();
+        $data->station_name = $request->station_name;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active ?? '1';
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
+        $data->save();
+        return response()->json($data);
+
     }
 
     /**
@@ -42,24 +55,39 @@ class MdStationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MdStation $mdStation)
+    public function edit( $id)
     {
         //
+        $data = MdStation::find($id);
+        return response()->json($data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MdStation $mdStation)
+    public function update(Request $request,  $id)
     {
         //
+        $data =  MdStation::find($id);
+        $data->station_name = $request->station_name;
+        $data->cd_client_id = $request->cd_client_id;
+        $data->cd_brand_id = $request->cd_brand_id;
+        $data->cd_branch_id = $request->cd_branch_id;
+        $data->is_active = $request->is_active ?? '1';
+        $data->created_by = $request->created_by;
+        $data->updated_by = $request->updated_by;
+        $data->save();
+        return response()->json($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MdStation $mdStation)
+    public function destroy( $id)
     {
         //
+        $data = MdStation::find($id);
+        $data->delete();
+        return response()->json($data);
     }
 }

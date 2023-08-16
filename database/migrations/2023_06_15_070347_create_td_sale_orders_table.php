@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('order_type')->nullable();
             $table->string('payment_type')->nullable();
             $table->string('split_type')->nullable();
-            $table->string('table_no')->nullable();
+            $table->string('table_no                                                                                                                        ')->nullable();
             $table->dateTime('time')->nullable();
             $table->string('discount')->nullable();
             $table->string('card_no')->nullable();
