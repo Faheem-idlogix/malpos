@@ -19,6 +19,7 @@ use App\Http\Controllers\TdCurrencyController;
 use App\Http\Controllers\GdCountryController;
 use App\Http\Controllers\GdRegionController;
 use App\Http\Controllers\MdStationController;
+use App\Http\Controllers\MdMenuController;
 
 
 
@@ -112,6 +113,12 @@ Route::post('station_store', [MdStationController::class, 'store'])->name('stati
 Route::post('station_update/{id}', [MdStationController::class, 'update'])->name('station_update');
 Route::get('station_edit/{id}', [MdStationController::class, 'edit'])->name('station_edit');
 Route::delete('station_delete/{id}', [MdStationController::class, 'destroy'])->name('station_delete');
+
+Route::get('menu', [MdMenuController::class, 'index'])->name('menu');
+Route::post('menu_store', [MdMenuController::class, 'store'])->name('menu_store');
+Route::post('menu_update/{id}', [MdMenuController::class, 'update'])->name('menu_update');
+Route::get('menu_edit/{id}', [MdMenuController::class, 'edit'])->name('menu_edit');
+Route::delete('menu_delete/{id}', [MdMenuController::class, 'destroy'])->name('menu_delete');
 
 
 Route::get('currency', [TdCurrencyController::class, 'index'])->name('currency');
