@@ -20,6 +20,10 @@ use App\Http\Controllers\GdCountryController;
 use App\Http\Controllers\GdRegionController;
 use App\Http\Controllers\MdStationController;
 use App\Http\Controllers\MdMenuController;
+use App\Http\Controllers\MdAllergyController;
+use App\Http\Controllers\MdDietController;
+
+
 
 
 
@@ -119,6 +123,18 @@ Route::post('menu_store', [MdMenuController::class, 'store'])->name('menu_store'
 Route::post('menu_update/{id}', [MdMenuController::class, 'update'])->name('menu_update');
 Route::get('menu_edit/{id}', [MdMenuController::class, 'edit'])->name('menu_edit');
 Route::delete('menu_delete/{id}', [MdMenuController::class, 'destroy'])->name('menu_delete');
+
+Route::get('allergy', [MdAllergyController::class, 'index'])->name('allergy');
+Route::post('allergy_store', [MdAllergyController::class, 'store'])->name('allergy_store');
+Route::post('allergy_update/{id}', [MdAllergyController::class, 'update'])->name('allergy_update');
+Route::get('allergy_edit/{id}', [MdAllergyController::class, 'edit'])->name('allergy_edit');
+Route::delete('allergy_delete/{id}', [MdAllergyController::class, 'destroy'])->name('allergy_delete');
+
+Route::get('diet', [MdDietController::class, 'index'])->name('diet');
+Route::post('diet_store', [MdDietController::class, 'store'])->name('diet_store');
+Route::post('diet_update/{id}', [MdDietController::class, 'update'])->name('diet_update');
+Route::get('diet_edit/{id}', [MdDietController::class, 'edit'])->name('diet_edit');
+Route::delete('diet_delete/{id}', [MdDietController::class, 'destroy'])->name('diet_delete');
 
 
 Route::get('currency', [TdCurrencyController::class, 'index'])->name('currency');
