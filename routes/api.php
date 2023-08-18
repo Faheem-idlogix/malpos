@@ -22,6 +22,9 @@ use App\Http\Controllers\MdStationController;
 use App\Http\Controllers\MdMenuController;
 use App\Http\Controllers\MdAllergyController;
 use App\Http\Controllers\MdDietController;
+use App\Http\Controllers\MdIngredientCategoryController;
+use App\Http\Controllers\MdIngredientController;
+
 
 
 
@@ -66,6 +69,8 @@ Route::post('tax_rate_store', [TdTaxRateController::class, 'store'])->name('tax_
 Route::get('tax_rate_edit/{id}', [TdTaxRateController::class, 'edit'])->name('tax_rate_edit');
 Route::post('tax_rate_update/{id}', [TdTaxRateController::class, 'update'])->name('tax_rate_update');
 Route::delete('tax_rate_delete/{id}', [TdTaxRateController::class, 'destroy'])->name('tax_rate_delete');
+
+
 Route::post('product_store', [MdProductController::class, 'store'])->name('product_store');
 Route::get('product_edit/{id}', [MdProductController::class, 'edit'])->name('product_edit');
 Route::post('product_update/{id}', [MdProductController::class, 'update'])->name('product_update');
@@ -135,6 +140,19 @@ Route::post('diet_store', [MdDietController::class, 'store'])->name('diet_store'
 Route::post('diet_update/{id}', [MdDietController::class, 'update'])->name('diet_update');
 Route::get('diet_edit/{id}', [MdDietController::class, 'edit'])->name('diet_edit');
 Route::delete('diet_delete/{id}', [MdDietController::class, 'destroy'])->name('diet_delete');
+
+
+Route::get('ingredient_category', [MdIngredientCategoryController::class, 'index'])->name('ingredient_category');
+Route::post('ingredient_category_store', [MdIngredientCategoryController::class, 'store'])->name('ingredient_category_store');
+Route::post('ingredient_category_update/{id}', [MdIngredientCategoryController::class, 'update'])->name('ingredient_category_update');
+Route::get('ingredient_category_edit/{id}', [MdIngredientCategoryController::class, 'edit'])->name('ingredient_category_edit');
+Route::delete('ingredient_category_delete/{id}', [MdIngredientCategoryController::class, 'destroy'])->name('ingredient_category_delete');
+
+Route::get('ingredient', [MdIngredientController::class, 'index'])->name('ingredient');
+Route::post('ingredient_store', [MdIngredientController::class, 'store'])->name('ingredient_store');
+Route::post('ingredient_update/{id}', [MdIngredientController::class, 'update'])->name('ingredient_update');
+Route::get('ingredient_edit/{id}', [MdIngredientController::class, 'edit'])->name('ingredient_edit');
+Route::delete('ingredient_delete/{id}', [MdIngredientController::class, 'destroy'])->name('ingredient_delete');
 
 
 Route::get('currency', [TdCurrencyController::class, 'index'])->name('currency');
