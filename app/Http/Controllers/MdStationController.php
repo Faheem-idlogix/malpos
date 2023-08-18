@@ -33,6 +33,9 @@ class MdStationController extends Controller
         //
         $data = new MdStation();
         $data->station_name = $request->station_name;
+        $data->count = $request->count;
+        $data->can_be_printed = $request->can_be_printed;
+        $data->station_reminder = $request->station_reminder;
         $data->cd_client_id = $request->cd_client_id;
         $data->cd_brand_id = $request->cd_brand_id;
         $data->cd_branch_id = $request->cd_branch_id;
@@ -70,6 +73,9 @@ class MdStationController extends Controller
         //
         $data =  MdStation::find($id);
         $data->station_name = $request->station_name;
+        $data->count = $request->count;
+        $data->can_be_printed = $request->can_be_printed;
+        $data->station_reminder = $request->station_reminder;
         $data->cd_client_id = $request->cd_client_id;
         $data->cd_brand_id = $request->cd_brand_id;
         $data->cd_branch_id = $request->cd_branch_id;
