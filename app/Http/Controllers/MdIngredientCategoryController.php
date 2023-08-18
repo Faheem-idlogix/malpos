@@ -88,11 +88,11 @@ class MdIngredientCategoryController extends Controller
         $data->is_active = $request->is_active ?? '1';
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
-        if ($image = $request->file('ingredient_category_image')) {
+        if ($image = $request->file('image')) {
             $destinationPath = public_path('img/ingredient_category_image/');
             $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $profileImage);
-            $data->ingredient_category_image = $profileImage;
+            $data->image = $profileImage;
         }
         $data->save();
         return response()->json($data);
