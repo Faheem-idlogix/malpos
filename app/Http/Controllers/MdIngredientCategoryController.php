@@ -68,7 +68,6 @@ class MdIngredientCategoryController extends Controller
     {
         //
         $data = MdIngredientCategory::find($id);
-        $data->delete();
         return response()->json($data);
     }
 
