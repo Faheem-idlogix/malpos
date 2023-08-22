@@ -24,6 +24,7 @@ use App\Http\Controllers\MdAllergyController;
 use App\Http\Controllers\MdDietController;
 use App\Http\Controllers\MdIngredientCategoryController;
 use App\Http\Controllers\MdIngredientController;
+use App\Http\Controllers\MdPreparationController;
 
 
 
@@ -153,6 +154,12 @@ Route::post('ingredient_store', [MdIngredientController::class, 'store'])->name(
 Route::post('ingredient_update/{id}', [MdIngredientController::class, 'update'])->name('ingredient_update');
 Route::get('ingredient_edit/{id}', [MdIngredientController::class, 'edit'])->name('ingredient_edit');
 Route::delete('ingredient_delete/{id}', [MdIngredientController::class, 'destroy'])->name('ingredient_delete');
+
+Route::get('preparation', [MdPreparationController::class, 'index'])->name('preparation');
+Route::post('preparation_store', [MdPreparationController::class, 'store'])->name('preparation_store');
+Route::post('preparation_update/{id}', [MdPreparationController::class, 'update'])->name('preparation_update');
+Route::get('preparation_edit/{id}', [MdPreparationController::class, 'edit'])->name('preparation_edit');
+Route::delete('preparation_delete/{id}', [MdPreparationController::class, 'destroy'])->name('preparation_delete');
 
 
 Route::get('currency', [TdCurrencyController::class, 'index'])->name('currency');

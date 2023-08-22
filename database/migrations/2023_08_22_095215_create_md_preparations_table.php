@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('md_ingredients', function (Blueprint $table) {
-            $table->id('md_ingredient_id');
+        Schema::create('md_preparations', function (Blueprint $table) {
+            $table->id('md_preparation_id');
             $table->string('name');
+            $table->string('recipe_output')->nullable();
+            $table->string('description')->nullable();
+            $table->string('deleting_method')->nullable();
             $table->foreignId('md_ingredient_category_id')->on('md_ingredient_categories');
-            $table->string('unit')->nullable();
-            $table->integer('cost_price')->nullable();
-            $table->string('base_unit')->nullable();
-            $table->string('barcode')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
-            $table->foreignId('cd_branch_id')->on('cd_branchs');
+            $table->foreignId('cd_branch_id')->on('cd_branches');
             $table->boolean('is_active');
             $table->string('created_by');
             $table->string('updated_by');
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('md_ingredients');
+        Schema::dropIfExists('md_preparations');
     }
 };
