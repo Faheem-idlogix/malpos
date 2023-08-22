@@ -15,15 +15,17 @@ return new class extends Migration
             $table->id('md_ingredient_id');
             $table->string('name');
             $table->foreignId('md_ingredient_category_id')->on('md_ingredient_categories');
-            $table->string('unit');
-            $table->integer('cost_price');
-            $table->string('base_unit');
+            $table->string('unit')->nullable();
+            $table->integer('cost_price')->nullable();
+            $table->string('base_unit')->nullable();
+            $table->string('barcode')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
             $table->boolean('is_active');
             $table->string('created_by');
-            $table->string('updated_by');            $table->timestamps();
+            $table->string('updated_by');
+             $table->timestamps();
         });
     }
 
