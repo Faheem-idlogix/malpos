@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('recipe_output')->nullable();
             $table->string('description')->nullable();
             $table->string('deleting_method')->nullable();
+            $table->string('total_weight')->nullable();
+            $table->integer('total_cost')->nullable();
             $table->foreignId('md_ingredient_category_id')->on('md_ingredient_categories');
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');

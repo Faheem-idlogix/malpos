@@ -19,6 +19,8 @@ return new class extends Migration
             $table->integer('cost_price')->nullable();
             $table->string('base_unit')->nullable();
             $table->string('barcode')->nullable();
+            $table->string('gross_weight')->nullable();
+            $table->integer('cost')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
