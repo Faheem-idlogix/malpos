@@ -1,30 +1,32 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CdClientController;
-use App\Http\Controllers\CdUserController;
-use App\Http\Controllers\CdBrandController;
 use App\Http\Controllers\CdBranchController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MdProductCategoryController;
-use App\Http\Controllers\MdProductController;
-use App\Http\Controllers\TdSaleOrderController;
-use App\Http\Controllers\TdTaxCategoryController;
-use App\Http\Controllers\TdTaxRateController;
+use App\Http\Controllers\CdBrandController;
+use App\Http\Controllers\CdClientController;
 use App\Http\Controllers\CdRoleController;
-use App\Http\Controllers\MdBankController;
-use App\Http\Controllers\MdBankAccountController;
-use App\Http\Controllers\TdCurrencyController;
+use App\Http\Controllers\CdUserController;
 use App\Http\Controllers\GdCountryController;
 use App\Http\Controllers\GdRegionController;
-use App\Http\Controllers\MdStationController;
-use App\Http\Controllers\MdMenuController;
 use App\Http\Controllers\MdAllergyController;
+use App\Http\Controllers\MdBankAccountController;
+use App\Http\Controllers\MdBankController;
 use App\Http\Controllers\MdDietController;
 use App\Http\Controllers\MdIngredientCategoryController;
 use App\Http\Controllers\MdIngredientController;
+use App\Http\Controllers\MdMenuController;
+use App\Http\Controllers\MdMenuSectionController;
 use App\Http\Controllers\MdPreparationController;
+use App\Http\Controllers\MdProductCategoryController;
+use App\Http\Controllers\MdProductController;
+use App\Http\Controllers\MdStationController;
+use App\Http\Controllers\TdCurrencyController;
+use App\Http\Controllers\TdSaleOrderController;
+use App\Http\Controllers\TdTaxCategoryController;
+use App\Http\Controllers\TdTaxRateController;
+use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -129,6 +131,12 @@ Route::post('menu_store', [MdMenuController::class, 'store'])->name('menu_store'
 Route::post('menu_update/{id}', [MdMenuController::class, 'update'])->name('menu_update');
 Route::get('menu_edit/{id}', [MdMenuController::class, 'edit'])->name('menu_edit');
 Route::delete('menu_delete/{id}', [MdMenuController::class, 'destroy'])->name('menu_delete');
+
+Route::get('menu_section', [MdMenuSectionController::class, 'index'])->name('menu_section');
+Route::post('menu_section_store', [MdMenuSectionController::class, 'store'])->name('menu_section_store');
+Route::post('menu_section_update/{id}', [MdMenuSectionController::class, 'update'])->name('menu_section_update');
+Route::get('menu_section_edit/{id}', [MdMenuSectionController::class, 'edit'])->name('menu_section_edit');
+Route::delete('menu_section_delete/{id}', [MdMenuSectionController::class, 'destroy'])->name('menu_section_delete');
 
 Route::get('allergy', [MdAllergyController::class, 'index'])->name('allergy');
 Route::post('allergy_store', [MdAllergyController::class, 'store'])->name('allergy_store');
