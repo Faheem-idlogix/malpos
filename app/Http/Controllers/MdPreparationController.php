@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MdPreparation;
 use App\Models\MdIngredient;
+use App\Models\MdPreparationIngredient;
+
 
 use Illuminate\Http\Request;
 
@@ -49,24 +51,15 @@ class MdPreparationController extends Controller
         $data->updated_by = $request->updated_by;
         $data->save();
 
+        $preparation_id = MdPreparation::latest()->value('md_preparation_id');
+
         foreach($request->ingredients as $ingredient){
-            $cdata = new MdIngredient();
-            $cdata->name = $ingredient->name;
-            $cdata->md_ingredient_category_id = $ingredient->md_ingredient_category_id;
-            $cdata->unit = $ingredient->unit;
-            $cdata->base_unit = $ingredient->base_unit;
-            $cdata->cost_price = $ingredient->cost_price;
-            $cdata->total_weight = $ingredient->total_weight;
-            $cdata->total_cost = $ingredient->total_cost;
-            $cdata->cd_client_id = $ingredient->cd_client_id;
-            $cdata->cd_brand_id = $ingredient->cd_brand_id;
-            $cdata->cd_branch_id = $ingredient->cd_branch_id;
-            $cdata->is_active = $ingredient->is_active ?? '1';
-            $cdata->created_by = $ingredient->created_by;
-            $cdata->updated_by = $ingredient->updated_by;
+            $cdata = new MdPreparationIngredient();
+            $cdata->md_preparation_id = $preparation_id;
+            $cdata->md_ingredient_id = $ingredient['md_ingredient_id'];
             $cdata->save();
         }
-        return response()->json(['preparation'=> $data, 'ingredient'=> $cdata]);
+        return response()->json(['preparation'=> $data]);
     }
 
     /**
