@@ -76,7 +76,7 @@ class MdPreparationController extends Controller
     public function edit( $id)
     {
         //
-        $data = MdPreparation::find($id);
+        $data = MdPreparation::with('preparation_ingredient.ingredient')->where('md_preparation_id', $id)->get();
         return response()->json($data);
     }
 
@@ -92,6 +92,8 @@ class MdPreparationController extends Controller
         $data->recipe_output = $request->recipe_output;
         $data->description = $request->description;
         $data->deleting_method = $request->deleting_method;
+        $data->total_weight = $request->total_weight;
+        $data->total_cost = $request->total_cost;
         $data->cd_client_id = $request->cd_client_id;
         $data->cd_brand_id = $request->cd_brand_id;
         $data->cd_branch_id = $request->cd_branch_id;
@@ -99,7 +101,17 @@ class MdPreparationController extends Controller
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
         $data->save();
-        return response()->json($data);
+
+        $preparation_id = MdPreparation::latest()->value('md_preparation_id');
+        $preparation_ingredient = MdPreparationIngredient::where('md_preparation_id', $id)->delete();
+
+        foreach($request->ingredients as $ingredient){
+            $cdata = new MdPreparationIngredient();
+            $cdata->md_preparation_id = $preparation_id;
+            $cdata->md_ingredient_id = $ingredient['md_ingredient_id'];
+            $cdata->save();
+        }
+        return response()->json(['preparation'=> $data]);
     }
 
     /**

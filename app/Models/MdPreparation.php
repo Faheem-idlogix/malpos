@@ -12,7 +12,10 @@ class MdPreparation extends Model
     protected $primaryKey = 'md_preparation_id';
     protected $guarded = ['md_preparation_id'];
 
-    
+    public function preparation_ingredient(){
+        return $this->hasMany(MdPreparationIngredient::class, 'md_preparation_id');
+    }
+
 
     public function branch(){
         return $this->belongsTo(CdBranch::class, 'cd_branch_id');
