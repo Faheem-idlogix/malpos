@@ -10,7 +10,7 @@ class MdMenuSectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index($id = null)
     {
         //
         if($id =! null){
