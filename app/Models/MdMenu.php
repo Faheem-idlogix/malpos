@@ -24,4 +24,7 @@ class MdMenu extends Model
     public function station(){
         return $this->belongsTo(MdStation::class, 'md_station_id');
     }
+    public function menu_section(){
+        return $this->hasMany(MdMenuSection::class, 'md_menu_id');
+    }
 }

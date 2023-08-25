@@ -10,11 +10,18 @@ class MdMenuSectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
         //
-        $data = MdMenuSection::all();
-        return response()->json($data);
+        if($id =! null){
+            $data = MdMenuSection::where('md_menu_id', $id)->get();
+            return response()->json($data);
+        }
+        else{
+            $data = MdMenuSection::all();
+            return response()->json($data);
+        }
+      
     }
 
     /**
