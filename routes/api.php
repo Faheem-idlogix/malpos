@@ -132,7 +132,7 @@ Route::post('menu_update/{id}', [MdMenuController::class, 'update'])->name('menu
 Route::get('menu_edit/{id}', [MdMenuController::class, 'edit'])->name('menu_edit');
 Route::delete('menu_delete/{id}', [MdMenuController::class, 'destroy'])->name('menu_delete');
 
-Route::get('menu_section/{$id}', [MdMenuSectionController::class, 'index'])->name('menu_section');
+Route::get('menu_section/{id?}', [MdMenuSectionController::class, 'index'])->name('menu_section');
 Route::post('menu_section_store', [MdMenuSectionController::class, 'store'])->name('menu_section_store');
 Route::post('menu_section_update/{id}', [MdMenuSectionController::class, 'update'])->name('menu_section_update');
 Route::get('menu_section_edit/{id}', [MdMenuSectionController::class, 'edit'])->name('menu_section_edit');
