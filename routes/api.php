@@ -23,6 +23,7 @@ use App\Http\Controllers\TdCurrencyController;
 use App\Http\Controllers\TdSaleOrderController;
 use App\Http\Controllers\TdTaxCategoryController;
 use App\Http\Controllers\TdTaxRateController;
+use App\Http\Controllers\MdModifierController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -137,6 +138,12 @@ Route::post('menu_section_store', [MdMenuSectionController::class, 'store'])->na
 Route::post('menu_section_update/{id}', [MdMenuSectionController::class, 'update'])->name('menu_section_update');
 Route::get('menu_section_edit/{id}', [MdMenuSectionController::class, 'edit'])->name('menu_section_edit');
 Route::delete('menu_section_delete/{id}', [MdMenuSectionController::class, 'destroy'])->name('menu_section_delete');
+
+Route::get('modifier/{id?}', [MdModifierController::class, 'index'])->name('modifier');
+Route::post('modifier_store', [MdModifierController::class, 'store'])->name('modifier_store');
+Route::post('modifier_update/{id}', [MdModifierController::class, 'update'])->name('modifier_update');
+Route::get('modifier_edit/{id}', [MdModifierController::class, 'edit'])->name('modifier_edit');
+Route::delete('modifier_delete/{id}', [MdModifierController::class, 'destroy'])->name('modifier_delete');
 
 Route::get('allergy', [MdAllergyController::class, 'index'])->name('allergy');
 Route::post('allergy_store', [MdAllergyController::class, 'store'])->name('allergy_store');
