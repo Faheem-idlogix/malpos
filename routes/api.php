@@ -7,6 +7,7 @@ use App\Http\Controllers\CdRoleController;
 use App\Http\Controllers\CdUserController;
 use App\Http\Controllers\GdCountryController;
 use App\Http\Controllers\GdRegionController;
+use App\Http\Controllers\KdsController;
 use App\Http\Controllers\MdAllergyController;
 use App\Http\Controllers\MdBankAccountController;
 use App\Http\Controllers\MdBankController;
@@ -218,6 +219,11 @@ Route::post('cdbranch_store', [CdBranchController::class, 'store'])->name('cdbra
 Route::post('cdbranch_update/{id}', [CdBranchController::class, 'update'])->name('cdbranch_update');
 Route::get('cdbranch_edit/{id}', [CdBranchController::class, 'edit'])->name('cdbranch_edit');
 Route::delete('cdbranch_delete/{id}', [CdBranchController::class, 'destroy'])->name('cdbranch_delete');
+
+Route::post('kds_status_update/{id}', [KdsController::class, 'update'])->name('kds_status_update');
+Route::post('show_kds', [KdsController::class, 'show_kds'])->name('show_kds');
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

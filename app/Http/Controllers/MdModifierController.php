@@ -85,9 +85,35 @@ class MdModifierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MdModifier $mdModifier)
+    public function update(Request $request,  $id)
     {
         //
+        $data =  MdModifier::find($id);
+        $data->name = $request->input('name');
+        $data->min_select = $request->input('min_select');
+        $data->max_select = $request->input('max_select');
+        $data->cd_client_id = $request->input('cd_client_id');
+        $data->cd_brand_id = $request->input('cd_brand_id');
+        $data->cd_branch_id = $request->input('cd_branch_id');
+        $data->is_active = $request->input('is_active', '1');
+        $data->created_by = $request->input('created_by');
+        $data->updated_by = $request->input('updated_by');
+        $data->save();
+        $deleteMdModifier = MdSubModifier::where('md_modifier_id', $id)->delete();
+        $latestMdModifier = MdModifier::latest()->first()->md_modifier_id;
+        $submodifierData = $request->input('submodifierData');
+           
+        foreach ($submodifierData as $itemData) {
+            $submodifier = new MdSubModifier();
+            $submodifier->name = $itemData['name'];
+            $submodifier->min = $itemData['min'];
+            $submodifier->max = $itemData['max'];
+            $submodifier->price = $itemData['price'];
+            $submodifier->md_modifier_id = $latestMdModifier; // Assuming you have a foreign key relationship
+            $submodifier->save();
+        }
+        $cdata = MdSubModifier::with('modifier')->where('md_modifier_id', $latestMdModifier)->get();
+        return response()->json(['modifier'=>$data, 'submodifier'=>$cdata]);
     }
 
     /**

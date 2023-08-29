@@ -18,9 +18,11 @@ return new class extends Migration
             $table->string('qty')->nullable();
             $table->string('price')->nullable();
             $table->string('comment')->nullable();
+            $table->string('order_item_status')->nullable();
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
             $table->foreignId('cd_branch_id')->on('cd_branchs');
+            $table->boolean('is_new')->default(true);
             $table->boolean('is_active');
             $table->string('created_by');
             $table->string('updated_by');
