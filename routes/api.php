@@ -220,7 +220,7 @@ Route::post('cdbranch_update/{id}', [CdBranchController::class, 'update'])->name
 Route::get('cdbranch_edit/{id}', [CdBranchController::class, 'edit'])->name('cdbranch_edit');
 Route::delete('cdbranch_delete/{id}', [CdBranchController::class, 'destroy'])->name('cdbranch_delete');
 
-Route::post('kds_status_update/{id}', [KdsController::class, 'update'])->name('kds_status_update');
+Route::post('kds_status_update', [KdsController::class, 'update'])->name('kds_status_update');
 Route::post('show_kds', [KdsController::class, 'show_kds'])->name('show_kds');
 
 

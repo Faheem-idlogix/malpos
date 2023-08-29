@@ -6,7 +6,6 @@ use App\Models\Kds;
 use App\Models\TdSaleOrderItem;
 use App\Models\TdSaleOrder;
 
-
 use Illuminate\Http\Request;
 
 class KdsController extends Controller
@@ -44,7 +43,7 @@ class KdsController extends Controller
     {
         //
         $station_id = $request->md_station_id;
-        $data = TdSaleOrderItem::with('td_sale_order','md_product')->where('md_station_id', $station_id)->get();
+        $data = TdSaleOrder::with('td_sale_order_item','td_sale_order_item.md_product')->where('md_station_id', $station_id)->get();
         return response()->json($data);
     }
 
@@ -52,16 +51,23 @@ class KdsController extends Controller
      * Show the form for editing the specified resource.
      */
 
-     
+
      public function show_kds(Request $request){
         $station_id = $request->md_station_id;
-        $data = TdSaleOrderItem::with(['td_sale_order', 'md_product'])
-        ->whereHas('md_product', function ($query) use ($station_id) {
-            $query->where('md_station_id', $station_id);
-        })
-        ->get();
-        return response()->json($data);
-     }
+        $filter = $request->filter;
+            $data_qry = TdSaleOrder::with(['td_sale_order_item', 'td_sale_order_item.md_product']);
+
+            if($filter != null){
+                $data_qry->whereHas('td_sale_order_item', function ($query) use ($filter) {
+                $query->where('order_item_status', $filter);
+            });       
+            }
+
+            $data = $data_qry->whereHas('td_sale_order_item.md_product', function ($query) use ($station_id) {
+                $query->where('md_station_id', $station_id);
+            })->get();
+            return response()->json($data);
+        }
 
 
     public function edit(Kds $kds)
@@ -72,22 +78,18 @@ class KdsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request)
     {
-        //
-        $data = TdSaleOrderItem::find($id);
-        $data->order_item_status = $request->order_item_status;
-        $data->save();
+       $order_item_id = $request->md_order_item_id;
+       $status = $request->md_order_item_status;
+       foreach($order_item_id as $id){
+          $data = TdSaleOrderItem::find($id);
+          $data->order_item_status = $status;
+          $data->save();
+       }
         return response()->json($data);
     }
 
-    public function filter(Request $request )
-    {
-        $filter = $request->filter;
-        $data = TdSaleOrder::with('td_sale_order_item')->where('order_item_status' , $filter)->get();
-        return response()->json($data);
-
-    }
 
     /**
      * Remove the specified resource from storage.
