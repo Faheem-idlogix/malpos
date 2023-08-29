@@ -78,9 +78,11 @@ class MdModifierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MdModifier $mdModifier)
+    public function edit( $id)
     {
         //
+           $data = MdModifier::with('sub_modifier')->find($id);
+           return response()->json($data);
     }
 
     /**
@@ -121,8 +123,12 @@ class MdModifierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MdModifier $mdModifier)
+    public function destroy( $id)
     {
         //
+        $data = MdModifier::find($id);
+        $data->delete();
+        $sub_modifier = MdSubModifier::where('md_modifier_id',$id)->delete();
+        return response()->json($data);
     }
 }
