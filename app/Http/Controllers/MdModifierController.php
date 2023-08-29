@@ -40,6 +40,7 @@ class MdModifierController extends Controller
         //
         $data = new MdModifier();
         $data->name = $request->input('name');
+        $data->modifier_type = $request->input('modifier_type');
         $data->min_select = $request->input('min_select');
         $data->max_select = $request->input('max_select');
         $data->cd_client_id = $request->input('cd_client_id');
@@ -90,6 +91,7 @@ class MdModifierController extends Controller
         //
         $data =  MdModifier::find($id);
         $data->name = $request->input('name');
+        $data->modifier_type = $request->input('modifier_type');
         $data->min_select = $request->input('min_select');
         $data->max_select = $request->input('max_select');
         $data->cd_client_id = $request->input('cd_client_id');

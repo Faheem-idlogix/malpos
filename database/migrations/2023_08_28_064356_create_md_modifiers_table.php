@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('md_modifiers', function (Blueprint $table) {
             $table->id('md_modifier_id');
             $table->string('name');
+            $table->string('modifier_type');
             $table->string('min_select');
             $table->string('max_select');
             $table->foreignId('cd_client_id')->on('cd_clients');
