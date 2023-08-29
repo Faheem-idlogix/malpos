@@ -9,6 +9,9 @@ class TdSaleOrderItem extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'td_sale_order_item_id';
+    protected $guarded = ['td_sale_order_item_id'];
+
     public function td_sale_order(){
         return $this->belongsTo(TdSaleOrder::class, 'td_sale_order_id');
     }

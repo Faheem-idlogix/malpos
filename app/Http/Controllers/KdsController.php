@@ -80,15 +80,23 @@ class KdsController extends Controller
      */
     public function update(Request $request)
     {
-       $order_item_id = $request->md_order_item_id;
-       $status = $request->md_order_item_status;
-       foreach($order_item_id as $id){
-          $data = TdSaleOrderItem::find($id);
-          $data->order_item_status = $status;
-          $data->save();
-       }
-        return response()->json($data);
+        $order_item_id = $request->md_order_item_id;
+        $status = $request->md_order_item_status;
+        $responseData = [];
+    
+        foreach ($order_item_id as $id) {
+            $data = TdSaleOrderItem::find($id);
+    
+            if ($data) {
+                $data->order_item_status = $status;
+                $data->save();
+                $responseData[] = $data;
+            }
+        }
+    
+        return response()->json(['data' => $responseData]);
     }
+    
 
 
     /**
