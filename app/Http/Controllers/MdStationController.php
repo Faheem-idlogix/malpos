@@ -12,19 +12,18 @@ class MdStationController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        // $data = MdStation::all();
-        // return response()->json($data);
         $search = $request->input('search');
-        $query = MdStation::all();
+        $query = MdStation::query(); // Use query() to get a query builder instance
+    
         if ($search) {
-            $query->where(function ($innerQuery) use ($search) {
-                $innerQuery->where('station_name', 'LIKE', "%$search%");
-            });
+            $query->where('station_name', 'LIKE', "%$search%");
         }
-        $data = $query->paginate(10);
+    
+        $data = $query->paginate(10); // Now you can use paginate on the query builder
+    
         return response()->json($data);
     }
+    
 
     /**
      * Show the form for creating a new resource.

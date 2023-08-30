@@ -15,7 +15,7 @@ class MdIngredientController extends Controller
         // $data = MdIngredient::all();
         // return response()->json($data);
         $search = $request->input('search');
-        $query = MdIngredient::all();
+        $query = MdIngredient::query();
         if ($search) {
             $query->where(function ($innerQuery) use ($search) {
                 $innerQuery->where('name', 'LIKE', "%$search%");

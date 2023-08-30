@@ -16,7 +16,7 @@ class MdMenuController extends Controller
         // $data = MdMenu::all();
         // return response()->json($data);
         $search = $request->input('search');
-        $query = MdMenu::all();
+        $query = MdMenu::query();
         if ($search) {
             $query->where(function ($innerQuery) use ($search) {
                 $innerQuery->where('menu_name', 'LIKE', "%$search%");

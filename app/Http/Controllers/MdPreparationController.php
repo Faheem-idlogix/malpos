@@ -21,7 +21,7 @@ class MdPreparationController extends Controller
         // return response()->json($data);
 
     $search = $request->input('search');
-    $query = MdPreparation::all();
+    $query = MdPreparation::query();
     if ($search) {
         $query->where(function ($innerQuery) use ($search) {
             $innerQuery->where('name', 'LIKE', "%$search%");

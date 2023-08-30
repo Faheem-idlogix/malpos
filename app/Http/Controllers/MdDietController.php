@@ -16,7 +16,7 @@ class MdDietController extends Controller
         // $data = MdDiet::all();
         // return response()->json($data);
         $search = $request->input('search');
-        $query = MdDiet::all();
+        $query = MdDiet::query();
         if ($search) {
             $query->where(function ($innerQuery) use ($search) {
                 $innerQuery->where('diet_name', 'LIKE', "%$search%");

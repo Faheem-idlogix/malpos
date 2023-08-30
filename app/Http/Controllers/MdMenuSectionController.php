@@ -22,7 +22,7 @@ class MdMenuSectionController extends Controller
         //     return response()->json($data);
         // }
         $search = $request->input('search');
-        $query = MdMenuSection::all();
+        $query = MdMenuSection::query();
         if ($id !== null) {
             $query->where('md_menu_id', $id);
         }

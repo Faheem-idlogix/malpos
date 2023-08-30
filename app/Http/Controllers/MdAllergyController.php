@@ -16,7 +16,7 @@ class MdAllergyController extends Controller
         // $data = MdAllergy::all();
         // return response()->json($data);
         $search = $request->input('search');
-        $query = MdAllergy::all();
+        $query = MdAllergy::query();
         if ($search) {
             $query->where(function ($innerQuery) use ($search) {
                 $innerQuery->where('allergy_name', 'LIKE', "%$search%");
