@@ -10,17 +10,39 @@ class MdProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id = null)
-    {
-     if($id != null){
-            $product = MdProduct::where('md_product_category_id', $id)->get();
-        }
-        else{
-            $product = MdProduct::with('client','brand', 'branch')->get();
-            // $order_detail = OrderDetail::all();
-        }
-        return response()->json(['product'=>$product]);
+    // public function index(Request $request, $id = null)
+    // {
+    //  if($id != null){
+    //         $query = MdProduct::where('md_product_category_id', $id)->get();
+    //     }
+    //     else{
+    //         $query = MdProduct::with('client','brand', 'branch')->paginate(10);
+    //         // $order_detail = OrderDetail::all();
+    //     }
+    //     return response()->json(['product'=>$query]);
+    // }
+
+    public function index(Request $request, $id = null)
+{
+    $search = $request->input('search');
+    $query = MdProduct::with('client', 'brand', 'branch');
+
+    if ($id !== null) {
+        $query->where('md_product_category_id', $id);
     }
+
+    if ($search) {
+        $query->where(function ($innerQuery) use ($search) {
+            $innerQuery->where('name', 'LIKE', "%$search%")
+                ->orWhere('description', 'LIKE', "%$search%");
+        });
+    }
+
+    $products = $query->paginate(10);
+
+    return response()->json(['products' => $products]);
+}
+
 
     /**
      * Show the form for creating a new resource.
