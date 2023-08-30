@@ -10,12 +10,20 @@ class MdAllergyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = MdAllergy::all();
+        // $data = MdAllergy::all();
+        // return response()->json($data);
+        $search = $request->input('search');
+        $query = MdAllergy::all();
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('allergy_name', 'LIKE', "%$search%");
+            });
+        }
+        $data = $query->paginate(10);
         return response()->json($data);
-
     }
 
     /**

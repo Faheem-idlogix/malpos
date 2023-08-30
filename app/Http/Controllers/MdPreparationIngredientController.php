@@ -13,6 +13,7 @@ class MdPreparationIngredientController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**

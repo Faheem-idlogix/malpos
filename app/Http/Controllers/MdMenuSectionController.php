@@ -10,17 +10,29 @@ class MdMenuSectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id = null)
+    public function index(Request $request, $id = null)
     {
         //
-        if($id =! null){
-            $data = MdMenuSection::where('md_menu_id', $id)->get();
-            return response()->json($data);
+        // if($id =! null){
+        //     $data = MdMenuSection::where('md_menu_id', $id)->get();
+        //     return response()->json($data);
+        // }
+        // else{
+        //     $data = MdMenuSection::all();
+        //     return response()->json($data);
+        // }
+        $search = $request->input('search');
+        $query = MdMenuSection::all();
+        if ($id !== null) {
+            $query->where('md_menu_id', $id);
         }
-        else{
-            $data = MdMenuSection::all();
-            return response()->json($data);
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('name', 'LIKE', "%$search%");
+            });
         }
+        $data = $query->paginate(10);
+        return response()->json($data);
       
     }
 

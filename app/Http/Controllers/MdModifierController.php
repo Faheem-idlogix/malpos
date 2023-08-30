@@ -12,16 +12,32 @@ class MdModifierController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id = null)
+    public function index(Request $request, $id = null)
     {
-        if($id != null){
-               $modifier = MdModifier::where('md_modifier_id', $id)->get();
-           }
-           else{
-               $modifier = MdModifier::with('client','brand', 'branch', 'sub_modifier')->get();
-               // $order_detail = OrderDetail::all();
-           }
-           return response()->json(['modifier'=>$modifier]);
+        // if($id != null){
+        //        $modifier = MdModifier::where('md_modifier_id', $id)->get();
+        //    }
+        //    else{
+        //        $modifier = MdModifier::with('client','brand', 'branch', 'sub_modifier')->get();
+        //        // $order_detail = OrderDetail::all();
+        //    }
+        //    return response()->json(['modifier'=>$modifier]);
+        $search = $request->input('search');
+        $query = MdModifier::with('client', 'brand', 'branch','sub_modifier');
+    
+        if ($id !== null) {
+            $query->where('md_modifier_id', $id);
+        }
+    
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('name', 'LIKE', "%$search%");
+            });
+        }
+    
+        $modifier = $query->paginate(10);
+    
+        return response()->json(['modifier' => $modifier]);
        }
 
     /**

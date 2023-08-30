@@ -14,11 +14,21 @@ class MdPreparationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = MdPreparation::all();
-        return response()->json($data);
+        // $data = MdPreparation::all();
+        // return response()->json($data);
+
+    $search = $request->input('search');
+    $query = MdPreparation::all();
+    if ($search) {
+        $query->where(function ($innerQuery) use ($search) {
+            $innerQuery->where('name', 'LIKE', "%$search%");
+        });
+    }
+    $data = $query->paginate(10);
+    return response()->json($data);
     }
 
     /**

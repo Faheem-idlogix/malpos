@@ -10,10 +10,19 @@ class MdDietController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = MdDiet::all();
+        // $data = MdDiet::all();
+        // return response()->json($data);
+        $search = $request->input('search');
+        $query = MdDiet::all();
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('diet_name', 'LIKE', "%$search%");
+            });
+        }
+        $data = $query->paginate(10);
         return response()->json($data);
     }
 

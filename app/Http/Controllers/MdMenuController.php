@@ -10,11 +10,21 @@ class MdMenuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = MdMenu::all();
+        // $data = MdMenu::all();
+        // return response()->json($data);
+        $search = $request->input('search');
+        $query = MdMenu::all();
+        if ($search) {
+            $query->where(function ($innerQuery) use ($search) {
+                $innerQuery->where('menu_name', 'LIKE', "%$search%");
+            });
+        }
+        $data = $query->paginate(10);
         return response()->json($data);
+        
     }
 
     /**
