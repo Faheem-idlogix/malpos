@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CdRoleSeeder::class);
         $this->call(GdCountrySeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(MdStationSeeder::class);
+
 
 
 

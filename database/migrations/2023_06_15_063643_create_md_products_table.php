@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('product_price');
             $table->string('product_image')->nullable();
+            $table->string('deleting_method')->nullable();
+            $table->string('total_weight')->nullable();
             $table->string('barcode')->nullable();
             $table->foreignId('md_station_id')->on('md_stations')->nullable();
             $table->string('maximun_day_of_product_return')->nullable();

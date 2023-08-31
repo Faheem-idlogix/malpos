@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MdProduct;
+use App\Models\MdProductDetail;
 use Illuminate\Http\Request;
 
 class MdProductController extends Controller
@@ -58,20 +59,11 @@ class MdProductController extends Controller
     public function store(Request $request)
     {
         $data = new MdProduct();
-        // $data->product_code = $request->product_code;
-        // $data->product_name = $request->product_name;
-        // $data->product_price = $request->product_price;
-        // $data->md_product_category_id = $request->md_product_category_id;
-        // $data->cd_client_id = $request->cd_client_id;
-        // $data->cd_brand_id = $request->cd_brand_id;
-        // $data->cd_branch_id = $request->cd_branch_id;
-        // $data->is_active = $request->is_active ?? '1';
-        // $data->created_by = $request->created_by;
-        // $data->updated_by = $request->updated_by;
-        // $data->td_tax_category_id = $request->td_tax_category_id;
         $data->product_code = $request->input('product_code');
         $data->product_name = $request->input('product_name');
         $data->product_price = $request->input('product_price');
+        $data->deleting_method = $request->input('deleting_method');
+        $data->total_weight = $request->input('total_weight');
         $data->barcode = $request->input('barcode');
         $data->md_station_id = $request->input('md_station_id');
         $data->maximun_day_of_product_return = $request->input('maximun_day_of_product_return');
@@ -101,6 +93,22 @@ class MdProductController extends Controller
             $data->product_image = $profileImage;
         }
         $data->save();
+
+        $latestMdProductId = MdProduct::max('md_product_id');
+
+        $product_detail = $request->input('product_detail');
+
+        if ($product_detail) {
+            foreach($product_detail as $item){
+                $cdata = new MdProductDetail();
+                 $cdata->md_product_id = $latestMdProductId;
+                 $cdata->md_detail_id = $item['md_detail_id'];
+                 $cdata->product_type = $item['product_type'];
+                 $cdata->gross = $item['gross'];
+                 $cdata->cost = $item['cost'];
+                 $cdata->save();
+            }
+        }
         return response()->json($data);
     }
 
@@ -132,6 +140,8 @@ class MdProductController extends Controller
         $data->product_code = $request->input('product_code');
         $data->product_name = $request->input('product_name');
         $data->product_price = $request->input('product_price');
+        $data->deleting_method = $request->input('deleting_method');
+        $data->total_weight = $request->input('total_weight');
         $data->barcode = $request->input('barcode');
         $data->md_station_id = $request->input('md_station_id');
         $data->maximun_day_of_product_return = $request->input('maximun_day_of_product_return');
@@ -162,6 +172,22 @@ class MdProductController extends Controller
             $data->product_image = $profileImage;
         }
         $data->save();
+
+        $product_detail = $request->input('product_detail');
+         $delete_product_detail = MdProductDetail::where('md_product_detail_id', $id)->delete();
+        if ($product_detail) {
+            foreach($product_detail as $item){
+                $cdata = new MdProductDetail();
+                 $cdata->md_product_id = $id;
+                 $cdata->md_detail_id = $item['md_detail_id'];
+                 $cdata->product_type = $item['product_type'];
+                 $cdata->gross = $item['gross'];
+                 $cdata->cost = $item['cost'];
+
+                 $cdata->save();
+            }
+        }
+
         return response()->json($data);
     }
 
