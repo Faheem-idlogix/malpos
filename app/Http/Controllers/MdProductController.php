@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MdProduct;
 use App\Models\MdProductDetail;
+use App\Models\MdProductModifier;
 use Illuminate\Http\Request;
 
 class MdProductController extends Controller
@@ -97,6 +98,8 @@ class MdProductController extends Controller
         $latestMdProductId = MdProduct::max('md_product_id');
 
         $product_detail = $request->input('product_detail');
+        $product_modifiers = $request->input('product_modifiers');
+
 
         if ($product_detail) {
             foreach($product_detail as $item){
@@ -109,6 +112,16 @@ class MdProductController extends Controller
                  $cdata->save();
             }
         }
+
+        if ($product_modifiers) {
+            foreach($product_modifiers as $product_modifier){
+                $modifierData = new MdProductModifier();
+                 $modifierData->md_product_id = $latestMdProductId;
+                 $modifierData->md_modifier_id = $product_modifier['md_modifier_id'];
+                 $modifierData->save();
+            }
+        }
+
         return response()->json($data);
     }
 
@@ -174,7 +187,9 @@ class MdProductController extends Controller
         $data->save();
 
         $product_detail = $request->input('product_detail');
-         $delete_product_detail = MdProductDetail::where('md_product_detail_id', $id)->delete();
+        $product_modifiers = $request->input('product_modifiers');
+
+         $delete_product_detail = MdProductDetail::where('md_product_id', $id)->delete();
         if ($product_detail) {
             foreach($product_detail as $item){
                 $cdata = new MdProductDetail();
@@ -185,6 +200,16 @@ class MdProductController extends Controller
                  $cdata->cost = $item['cost'];
 
                  $cdata->save();
+            }
+        }
+        $delete_product_modifier = MdProductModifier::where('md_product_id', $id)->delete();
+
+        if ($product_modifiers) {
+            foreach($product_modifiers as $product_modifier){
+                $modifierData = new MdProductModifier();
+                 $modifierData->md_product_id = $id;
+                 $modifierData->md_modifier_id = $product_modifier['md_modifier_id'];
+                 $modifierData->save();
             }
         }
 
