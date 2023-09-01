@@ -25,6 +25,14 @@ class DatabaseSeeder extends Seeder
         $this->call(GdCountrySeeder::class);
         $this->call(UserSeeder::class);
         $this->call(MdStationSeeder::class);
+        $this->call(MdIngredientCategorySeeder::class);
+        $this->call(MdIngredientSeeder::class);
+        $this->call(MdAllergySeeder::class);
+        $this->call(MdDietSeeder::class);
+        $this->call(MdMenuSeeder::class);
+        $this->call(MdMenuSectionSeeder::class);
+
+
 
 
 
