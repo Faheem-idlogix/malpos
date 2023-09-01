@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MdDietSeeder::class);
         $this->call(MdMenuSeeder::class);
         $this->call(MdMenuSectionSeeder::class);
-        //$this->call(TdSaleOrderSeeder::class);
+        $this->call(TdSaleOrderSeeder::class);
 
 
 
