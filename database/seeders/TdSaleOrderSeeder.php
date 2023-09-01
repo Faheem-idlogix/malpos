@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\TdSaleOrder;
+use App\Models\TdSaleOrderItem;
+
 
 class TdSaleOrderSeeder extends Seeder
 {
@@ -13,5 +16,6 @@ class TdSaleOrderSeeder extends Seeder
     public function run(): void
     {
         //
+      
     }
 }
