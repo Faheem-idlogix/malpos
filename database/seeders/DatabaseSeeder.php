@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MdMenuSeeder::class);
         $this->call(MdMenuSectionSeeder::class);
         $this->call(TdSaleOrderSeeder::class);
+        $this->call(TdCurrencySeeder::class);
 
 
 
