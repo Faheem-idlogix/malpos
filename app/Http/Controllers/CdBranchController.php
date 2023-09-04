@@ -58,7 +58,7 @@ class CdBranchController extends Controller
      */
     public function edit($id)
     {
-        $data = CdBranch::find($id);
+        $data = CdBranch::with('brand', 'country', 'region', 'currency')->where('cd_branch_id', $id)->get();
         return response()->json($data);
     }
 
