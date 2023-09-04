@@ -14,7 +14,7 @@ class TdCurrencyController extends Controller
     {
         //
         $data = TdCurrency::all();
-        return response()->json(['data' => $data]);
+        return response()->json( $data);
     }
 
     /**
@@ -43,7 +43,7 @@ class TdCurrencyController extends Controller
         $data->description = $request->description;
 
          $data->save();
-        return response()->json(['data' => $data]);
+        return response()->json($data);
     }
 
     /**
@@ -61,7 +61,7 @@ class TdCurrencyController extends Controller
     {
         //
         $data = TdCurrency::find($id);
-        return response()->json(['data' => $data]);
+        return response()->json( $data);
 
 
     }
@@ -85,7 +85,7 @@ class TdCurrencyController extends Controller
 
 
          $data->save();
-        return response()->json(['data' => $data]);
+        return response()->json( $data);
     }
 
     /**
@@ -96,6 +96,6 @@ class TdCurrencyController extends Controller
         //
         $data = TdCurrency::find($id);
         $data->delete();
-        return response()->json(['data' => $data]);
+        return response()->json( $data);
     }
 }
