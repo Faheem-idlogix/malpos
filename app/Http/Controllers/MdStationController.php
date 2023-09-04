@@ -82,7 +82,8 @@ class MdStationController extends Controller
     public function edit( $id)
     {
         //
-        $data = MdStation::find($id);
+        $data = MdStation::with('station_product.product')->where('md_station_id', $id)->get();
+
         return response()->json($data);
     }
 
