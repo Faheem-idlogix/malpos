@@ -105,6 +105,17 @@ class MdStationController extends Controller
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
         $data->save();
+        $station_product = $request->input('station_product');
+        $delete_station_product = MdStationProduct::where('md_station_id', $id)->delete();
+
+        if ($station_product) {
+            foreach($station_product as $item){
+                $cdata = new MdStationProduct();
+                 $cdata->md_station_id = $id;
+                 $cdata->md_product_id = $item['md_product_id'];
+                 $cdata->save();
+            }
+        }
         return response()->json($data);
     }
 
