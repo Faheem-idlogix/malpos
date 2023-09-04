@@ -66,7 +66,6 @@ class MdProductController extends Controller
         $data->deleting_method = $request->input('deleting_method');
         $data->total_weight = $request->input('total_weight');
         $data->barcode = $request->input('barcode');
-        $data->md_station_id = $request->input('md_station_id');
         $data->maximun_day_of_product_return = $request->input('maximun_day_of_product_return');
         $data->cooking_time = $request->input('cooking_time');
         $data->description = $request->input('description');
@@ -156,7 +155,6 @@ class MdProductController extends Controller
         $data->deleting_method = $request->input('deleting_method');
         $data->total_weight = $request->input('total_weight');
         $data->barcode = $request->input('barcode');
-        $data->md_station_id = $request->input('md_station_id');
         $data->maximun_day_of_product_return = $request->input('maximun_day_of_product_return');
         $data->cooking_time = $request->input('cooking_time');
         $data->description = $request->input('description');

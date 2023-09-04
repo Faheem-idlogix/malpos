@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('deleting_method')->nullable();
             $table->string('total_weight')->nullable();
             $table->string('barcode')->nullable();
-            $table->foreignId('md_station_id')->on('md_stations')->nullable();
             $table->string('maximun_day_of_product_return')->nullable();
             $table->string('cooking_time')->nullable();
             $table->string('description')->nullable();
