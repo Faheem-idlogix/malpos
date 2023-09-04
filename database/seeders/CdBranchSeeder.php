@@ -18,6 +18,9 @@ class CdBranchSeeder extends Seeder
             [
                 'name' => 'KFC Johar Town',
                 'cd_brand_id' => '1',
+                'gd_country_id' => '1',
+                'gd_region_id' => '1',
+                'td_currency_id' => '1',
                 'is_active' => '1',
                 'created_by' => '1',
                 'updated_by' => '1',              
