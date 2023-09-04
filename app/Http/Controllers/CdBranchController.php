@@ -35,6 +35,9 @@ class CdBranchController extends Controller
         $data->name = $request->name;
         $data->is_active = $request->is_active;
         $data->cd_brand_id = $request->cd_brand_id;
+        $data->gd_country_id = $request->gd_country_id;
+        $data->gd_region_id = $request->gd_region_id;
+        $data->td_currency_id = $request->td_currency_id;
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
         $data->save();
@@ -69,6 +72,9 @@ class CdBranchController extends Controller
         $data->name = $request->name;
         $data->is_active = $request->is_active;
         $data->cd_brand_id = $request->cd_brand_id;
+        $data->gd_country_id = $request->gd_country_id;
+        $data->gd_region_id = $request->gd_region_id;
+        $data->td_currency_id = $request->td_currency_id;
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
         $data->save();
