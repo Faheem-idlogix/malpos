@@ -24,5 +24,9 @@ class MdMenuSection extends Model
     public function menu(){
         return $this->belongsTo(MdMenu::class, 'md_menu_id');
     }
+    public function menu_section_product(){
+        return $this->hasMany(MdMenuSectionProduct::class, 'md_menu_section_id');
+    }
+
 
 }

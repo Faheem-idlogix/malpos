@@ -17,4 +17,5 @@ class MdMenuSectionProduct extends Model
     public function currency(){
         return $this->belongsTo(TdCurrency::class, 'td_currency_id');
     }
+    
 }
