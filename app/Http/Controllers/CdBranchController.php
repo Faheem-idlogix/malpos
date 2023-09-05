@@ -4,16 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CdBranch;
 use Illuminate\Http\Request;
-/**
- * @OA\Info(title="My First API", version="0.1")
- */
 
 class CdBranchController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
         //
@@ -32,8 +28,6 @@ class CdBranchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
-
     public function store(Request $request)
     {
         //
