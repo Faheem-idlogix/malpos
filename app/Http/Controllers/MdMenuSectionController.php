@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MdMenuSection;
+use App\Models\MdMenuSectionProduct;
 use Illuminate\Http\Request;
 
 class MdMenuSectionController extends Controller
@@ -64,7 +65,20 @@ class MdMenuSectionController extends Controller
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
         $data->save();
-        return response()->json($data);
+        $product = $request->products;
+        $latestMenuSection = MdMenuSection::max('md_menu_section_id');
+
+           
+        foreach ($product as $itemData) {
+            $submodifier = new MdMenuSectionProduct();
+            $submodifier->md_menu_section_id = $latestMenuSection;
+            $submodifier->md_product_id = $itemData['md_product_id'];
+            $submodifier->td_currency_id = $itemData['td_currency_id'];
+            $submodifier->price = $itemData['price'];
+           // $submodifier->md_modifier_id = $latestMenuSection; // Assuming you have a foreign key relationship
+            $submodifier->save();
+        }
+        return response()->json(['menus_section'=>$data, 'menu_section_producy'=>$submodifier]);
     }
 
     /**
@@ -105,7 +119,20 @@ class MdMenuSectionController extends Controller
         $data->created_by = $request->created_by;
         $data->updated_by = $request->updated_by;
         $data->save();
-        return response()->json($data);
+        $product = $request->products;
+        $delete = MdMenuSectionProduct::where('md_menu_section_id', $id)->delete();
+
+           
+        foreach ($product as $itemData) {
+            $submodifier = MdMenuSectionProduct::new();
+            $submodifier->md_menu_section_id = $id;
+            $submodifier->md_product_id = $itemData['md_product_id'];
+            $submodifier->td_currency_id = $itemData['td_currency_id'];
+            $submodifier->price = $itemData['price'];
+           // $submodifier->md_modifier_id = $latestMenuSection; // Assuming you have a foreign key relationship
+            $submodifier->save();
+        }
+        return response()->json(['menus_section'=>$data, 'menu_section_producy'=>$submodifier]);
     }
 
     /**
