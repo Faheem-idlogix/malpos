@@ -94,7 +94,7 @@ class MdMenuSectionController extends Controller
      */
     public function edit( $id)
     {
-        $data = MdMenuSection::with('menu_section_product','menu_section_product.product','menu_section_product.currency')->where('md_menu_section_id', $id)->get();
+        $data = MdMenuSection::with('menu_section_product.product','menu_section_product.currency')->where('md_menu_section_id', $id)->get();
         return response()->json($data);
     }
 
