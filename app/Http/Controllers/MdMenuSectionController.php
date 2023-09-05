@@ -52,6 +52,10 @@ class MdMenuSectionController extends Controller
         //
         $data = new MdMenuSection();
         $data->name = $request->name;
+        $data->start_date = $request->start_date;
+        $data->end_date = $request->end_date;
+        $data->start_time = $request->start_time;
+        $data->end_time = $request->end_time;
         $data->md_menu_id = $request->md_menu_id;
         $data->cd_client_id = $request->cd_client_id;
         $data->cd_brand_id = $request->cd_brand_id;
@@ -89,6 +93,10 @@ class MdMenuSectionController extends Controller
         //
         $data =  MdMenuSection::find($id);
         $data->name = $request->name;
+        $data->start_date = $request->start_date;
+        $data->end_date = $request->end_date;
+        $data->start_time = $request->start_time;
+        $data->end_time = $request->end_time;
         $data->md_menu_id = $request->md_menu_id;
         $data->cd_client_id = $request->cd_client_id;
         $data->cd_brand_id = $request->cd_brand_id;

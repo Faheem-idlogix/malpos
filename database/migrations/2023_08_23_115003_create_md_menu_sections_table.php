@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('md_menu_sections', function (Blueprint $table) {
             $table->id('md_menu_section_id');
             $table->string('name');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->foreignId('md_menu_id')->on('md_menus');
             $table->foreignId('cd_client_id')->on('cd_clients');
             $table->foreignId('cd_brand_id')->on('cd_brands');
