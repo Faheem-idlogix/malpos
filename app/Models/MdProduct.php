@@ -23,7 +23,10 @@ class MdProduct extends Model
     public function client(){
         return $this->belongsTo(CdClient::class, 'cd_client_id');
     }
-    
+
+    public function station_product(){
+        return $this->hasMany(MdStationProduct::class, 'md_product_id');
+    }
 
     public function getProductImageAttribute()
 {

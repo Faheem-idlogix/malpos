@@ -43,7 +43,7 @@ class KdsController extends Controller
     {
         //
         $station_id = $request->md_station_id;
-        $data = TdSaleOrder::with('td_sale_order_item','td_sale_order_item.md_product')->where('md_station_id', $station_id)->get();
+        $data = TdSaleOrder::with('td_sale_order_item','td_sale_order_item.md_product.station_product')->where('md_station_id', $station_id)->get();
         return response()->json($data);
     }
 
@@ -55,6 +55,11 @@ class KdsController extends Controller
      public function show_kds(Request $request){
         $station_id = $request->md_station_id;
         $filter = $request->filter;
+        
+        // $data = TdSaleOrder::with('td_sale_order_item.md_product.station_product')->get();
+        // return response($data);
+
+
             $data_qry = TdSaleOrder::with(['td_sale_order_item', 'td_sale_order_item.md_product']);
 
             if($filter != null){
@@ -63,7 +68,7 @@ class KdsController extends Controller
             });       
             }
 
-            $data = $data_qry->whereHas('td_sale_order_item.md_product', function ($query) use ($station_id) {
+            $data = $data_qry->whereHas('td_sale_order_item.md_product.station_product', function ($query) use ($station_id) {
                 $query->where('md_station_id', $station_id);
             })->get();
             return response()->json($data);
