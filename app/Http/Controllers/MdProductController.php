@@ -26,17 +26,26 @@ class MdProductController extends Controller
 
     public function index(Request $request, $id = null)
 {
+    $search_product = $request->input('search_by_product');
     $search = $request->input('search');
+    $product_code = $request->input('product_code');
+    $md_station_id = $request->input('md_station_id');
+    $md_product_category_id = $request->input('md_product_category_id');
+    $gift = $request->input('gift');
+
     $query = MdProduct::with('client', 'brand', 'branch');
+
 
     if ($id !== null) {
         $query->where('md_product_category_id', $id);
     }
 
-    if ($search) {
-        $query->where(function ($innerQuery) use ($search) {
+    if ($search_product) {
+        $query->where(function ($innerQuery) use ($search, $product_code, $md_product_category_id, $md_station_id, $gift) {
             $innerQuery->where('product_name', 'LIKE', "%$search%")
-                ->orWhere('product_code', 'LIKE', "%$search%");
+                ->orWhere('product_code', 'LIKE', "%$product_code%")
+                ->orWhere('md_product_category_id', $md_product_category_id)
+                ->orWhere('gift', 'LIKE', "%$gift%");
         });
     }
 

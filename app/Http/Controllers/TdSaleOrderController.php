@@ -13,9 +13,24 @@ class TdSaleOrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search_order = $request->input('search_order');
+        $order_type = $request->input('order_type');
+        $status = $request->input('status');
+        $table = $request->input('table');
+        $query =  TdSaleOrder::with('td_sale_order_item.md_product');
+        if ($search_order) {
+            $query->where(function ($innerQuery) use ($order_type, $status, $table) {
+                $innerQuery->where('order_type', 'LIKE', "%$order_type%")
+                    ->orWhere('status', 'LIKE', "%$status%")
+                    ->orWhere('table_no', $table);
+            });
+        }
+    
+        $data = $query->paginate(10);
+    
+        return response()->json($data);
     }
 
     /**
