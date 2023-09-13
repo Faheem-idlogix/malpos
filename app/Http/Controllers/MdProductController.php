@@ -41,7 +41,7 @@ class MdProductController extends Controller
     }
 
     if ($search_product) {
-        $query->where(function ($innerQuery) use ($search, $product_code, $md_product_category_id, $md_station_id, $gift) {
+        $query->where(function ($innerQuery) use ($search, $product_code, $md_product_category_id, $gift) {
             $innerQuery->where('product_name', 'LIKE', "%$search%")
                 ->orWhere('product_code', 'LIKE', "%$product_code%")
                 ->orWhere('md_product_category_id', $md_product_category_id)
