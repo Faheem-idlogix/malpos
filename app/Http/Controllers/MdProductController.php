@@ -29,7 +29,7 @@ class MdProductController extends Controller
     $search_product = $request->input('search_by_product');
     $search = $request->input('search');
     $product_code = $request->input('product_code');
-    $md_station_id = $request->input('md_station_id');
+    // $md_station_id = $request->input('md_station_id');
     $md_product_category_id = $request->input('md_product_category_id');
     $gift = $request->input('gift');
 

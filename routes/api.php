@@ -79,7 +79,7 @@ Route::get('product_edit/{id}', [MdProductController::class, 'edit'])->name('pro
 Route::post('product_update/{id}', [MdProductController::class, 'update'])->name('product_update');
 Route::delete('product_delete/{id}', [MdProductController::class, 'destroy'])->name('product_delete');
 
-Route::post('order_search', [TdSaleOrderController::class, 'index'])->name('order_search');
+Route::post('search_order', [TdSaleOrderController::class, 'index'])->name('search_order');
 Route::post('save_order', [TdSaleOrderController::class, 'store'])->name('save_order');
 Route::get('edit_order/{id}', [TdSaleOrderController::class, 'edit'])->name('edit_order');
 Route::post('checkout_order/{id}', [TdSaleOrderController::class, 'checkout'])->name('checkout_order');
