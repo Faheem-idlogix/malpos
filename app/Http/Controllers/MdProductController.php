@@ -39,7 +39,16 @@ class MdProductController extends Controller
     $md_product_category_id = $request->input('md_product_category_id');
     $gift = $request->input('gift');
 
-    $query = MdProduct::with('client', 'brand', 'branch');
+    $query = MdProduct::with([
+        'client',
+        'product_branch.branch',
+        'product_brand.brand',
+        'product_product_category.product_category',
+        'product_detail',
+        'product_modifier.modifier',
+        'product_diet.diet',
+        'product_allergy.allergy',
+    ]);
 
 
     if ($id !== null) {
