@@ -122,11 +122,11 @@ class MdProductController extends Controller
 
         $product_detail = $request->input('product_detail');
         $product_modifiers = $request->input('product_modifiers');
-        $product_brands = $request->input('product_brand');
-        $product_branches = $request->input('product_branch');
-        $product_categories = $request->input('product_category');
-        $product_allergies = $request->input('product_allergy');
-        $product_diets = $request->input('product_diet');
+        $product_brands = $request->input('cd_brand_id');
+        $product_branches = $request->input('cd_branch_id');
+        $product_categories = $request->input('md_product_category_id');
+        $product_allergies = $request->input('md_allergy_id');
+        $product_diets = $request->input('md_diet_id');
 
 
 
@@ -248,23 +248,22 @@ class MdProductController extends Controller
         $data->maximun_day_of_product_return = $request->input('maximun_day_of_product_return');
         $data->cooking_time = $request->input('cooking_time');
         $data->description = $request->input('description');
-        $data->md_allergy_id = $request->input('md_allergy_id');
-        $data->md_diet_id = $request->input('md_diet_id');
+        // $data->md_allergy_id = $request->input('md_allergy_id');
+        // $data->md_diet_id = $request->input('md_diet_id');
         $data->gift = $request->input('gift');
         $data->portion = $request->input('portion');
         $data->bundle = $request->input('bundle');
         $data->not_allow_apply_discount = $request->input('not_allow_apply_discount');
         $data->sold_by_weight = $request->input('sold_by_weight');
         $data->sale_price = $request->input('sale_price');
-        $data->md_product_category_id = $request->input('md_product_category_id');
+        // $data->md_product_category_id = $request->input('md_product_category_id');
         $data->td_tax_category_id = $request->input('td_tax_category_id');
         $data->cd_client_id = $request->input('cd_client_id');
-        $data->cd_brand_id = $request->input('cd_brand_id');
-        $data->cd_branch_id = $request->input('cd_branch_id');
+        // $data->cd_brand_id = $request->input('cd_brand_id');
+        // $data->cd_branch_id = $request->input('cd_branch_id');
         $data->is_active = $request->input('is_active', '1');
         $data->created_by = $request->input('created_by');
         $data->updated_by = $request->input('updated_by');
-
 
         if ($image = $request->file('product_image')) {
             $destinationPath = public_path('img/product_image/');
@@ -274,10 +273,26 @@ class MdProductController extends Controller
         }
         $data->save();
 
+      
+
         $product_detail = $request->input('product_detail');
         $product_modifiers = $request->input('product_modifiers');
+        $product_brands = $request->input('cd_brand_id');
+        $product_branches = $request->input('cd_branch_id');
+        $product_categories = $request->input('md_product_category_id');
+        $product_allergies = $request->input('md_allergy_id');
+        $product_diets = $request->input('md_diet_id');
 
-         $delete_product_detail = MdProductDetail::where('md_product_id', $id)->delete();
+        $product_detail_delete = MdProductDetail::where('md_product_id', $id)->delete();
+        $product_modifiers_delete = MdProductModifier::where('md_product_id', $id)->delete();
+        $product_brands_delete = MdProductBrand::where('md_product_id', $id)->delete();
+        $product_branches_delete = MdProductBranch::where('md_product_id', $id)->delete();
+        $product_categories_delete = MdProductCategory::where('md_product_id', $id)->delete();
+        $product_allergies_delete = MdProductAllergy::where('md_product_id', $id)->delete();
+        $product_diets_delete = MdProductDiet::where('md_product_id', $id)->delete();
+
+
+
         if ($product_detail) {
             foreach($product_detail as $item){
                 $cdata = new MdProductDetail();
@@ -286,11 +301,9 @@ class MdProductController extends Controller
                  $cdata->product_type = $item['product_type'];
                  $cdata->gross = $item['gross'];
                  $cdata->cost = $item['cost'];
-
                  $cdata->save();
             }
         }
-        $delete_product_modifier = MdProductModifier::where('md_product_id', $id)->delete();
 
         if ($product_modifiers) {
             foreach($product_modifiers as $product_modifier){
@@ -301,7 +314,66 @@ class MdProductController extends Controller
             }
         }
 
-        return response()->json($data);
+        if ($product_brands) {
+            foreach($product_brands as $product_brand){
+                $brandData = new MdProductBrand();
+                 $brandData->md_product_id = $id;
+                 $brandData->cd_brand_id = $product_brand['cd_brands'];
+                 $brandData->save();
+            }
+        }
+
+        if ($product_branches) {
+            foreach($product_branches as $product_branch){
+                $branchData = new MdProductBranch();
+                 $branchData->md_product_id = $id;
+                 $branchData->cd_branch_id = $product_branch['cd_branches'];
+                 $branchData->save();
+            }
+        }
+
+        if ($product_categories) {
+            foreach($product_categories as $product_category){
+                $productCategoryData = new MdProductProductCategory();
+                 $productCategoryData->md_product_id = $id;
+                 $productCategoryData->md_product_category_id = $product_category['md_product_categories'];
+                 $productCategoryData->save();
+            }
+        }
+
+        if ($product_allergies) {
+            foreach($product_allergies as $product_allergy){
+                $allergyData = new MdProductAllergy();
+                 $allergyData->md_product_id = $id;
+                 $allergyData->md_allergy_id = $product_allergy['md_allergies'];
+                 $allergyData->save();
+            }
+        }
+
+        if ($product_diets) {
+            foreach($product_diets as $product_diet){
+                $dietData = new MdProductDiet();
+                 $dietData->md_product_id = $id;
+                 $dietData->md_diet_id = $product_diet['md_diets'];
+                 $dietData->save();
+            }
+        }
+
+        // $data = MdProduct::with('client' , 'product_branch.branch','product_brand.brand','product_product_category.product_category','product_detail','product_modifier.modifier','product_diet.diet','product_allergy.allergy')->where('md_product_id',$id)->get();
+        // return response()->json(['data'=>$data]);
+
+        $data = MdProduct::with([
+            'client',
+            'product_branch.branch',
+            'product_brand.brand',
+            'product_product_category.product_category',
+            'product_detail',
+            'product_modifier.modifier',
+            'product_diet.diet',
+            'product_allergy.allergy',
+        ])->where('md_product_id', $id)->get();
+
+          return response()->json(['data' => $data]);
     }
 
     /**
