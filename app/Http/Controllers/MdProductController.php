@@ -122,11 +122,11 @@ class MdProductController extends Controller
 
         $product_detail = $request->input('product_detail');
         $product_modifiers = $request->input('product_modifiers');
-        $product_brands = $request->input('cd_brand_id');
-        $product_branches = $request->input('cd_branch_id');
-        $product_categories = $request->input('md_product_category_id');
-        $product_allergies = $request->input('md_allergy_id');
-        $product_diets = $request->input('md_diet_id');
+        $product_brands = $request->input('product_brand');
+        $product_branches = $request->input('product_branch');
+        $product_categories = $request->input('product_category');
+        $product_allergies = $request->input('product_allergy');
+        $product_diets = $request->input('product_diet');
 
 
 
@@ -277,11 +277,11 @@ class MdProductController extends Controller
 
         $product_detail = $request->input('product_detail');
         $product_modifiers = $request->input('product_modifiers');
-        $product_brands = $request->input('cd_brand_id');
-        $product_branches = $request->input('cd_branch_id');
-        $product_categories = $request->input('md_product_category_id');
-        $product_allergies = $request->input('md_allergy_id');
-        $product_diets = $request->input('md_diet_id');
+        $product_brands = $request->input('product_brand');
+        $product_branches = $request->input('product_branch');
+        $product_categories = $request->input('product_category');
+        $product_allergies = $request->input('product_allergy');
+        $product_diets = $request->input('product_diet');
 
         $product_detail_delete = MdProductDetail::where('md_product_id', $id)->delete();
         $product_modifiers_delete = MdProductModifier::where('md_product_id', $id)->delete();
