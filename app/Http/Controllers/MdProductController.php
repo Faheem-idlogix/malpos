@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\MdProduct;
+use App\Models\MdProductAllergy;
+use App\Models\MdProductBrand;
+use App\Models\MdProductBranch;
+use App\Models\MdProductCategory;
 use App\Models\MdProductDetail;
+use App\Models\MdProductDiet;
 use App\Models\MdProductModifier;
+use App\Models\MdProductProductCategory;
 use Illuminate\Http\Request;
 
 class MdProductController extends Controller
@@ -78,19 +84,19 @@ class MdProductController extends Controller
         $data->maximun_day_of_product_return = $request->input('maximun_day_of_product_return');
         $data->cooking_time = $request->input('cooking_time');
         $data->description = $request->input('description');
-        $data->md_allergy_id = $request->input('md_allergy_id');
-        $data->md_diet_id = $request->input('md_diet_id');
+        // $data->md_allergy_id = $request->input('md_allergy_id');
+        // $data->md_diet_id = $request->input('md_diet_id');
         $data->gift = $request->input('gift');
         $data->portion = $request->input('portion');
         $data->bundle = $request->input('bundle');
         $data->not_allow_apply_discount = $request->input('not_allow_apply_discount');
         $data->sold_by_weight = $request->input('sold_by_weight');
         $data->sale_price = $request->input('sale_price');
-        $data->md_product_category_id = $request->input('md_product_category_id');
+        // $data->md_product_category_id = $request->input('md_product_category_id');
         $data->td_tax_category_id = $request->input('td_tax_category_id');
         $data->cd_client_id = $request->input('cd_client_id');
-        $data->cd_brand_id = $request->input('cd_brand_id');
-        $data->cd_branch_id = $request->input('cd_branch_id');
+        // $data->cd_brand_id = $request->input('cd_brand_id');
+        // $data->cd_branch_id = $request->input('cd_branch_id');
         $data->is_active = $request->input('is_active', '1');
         $data->created_by = $request->input('created_by');
         $data->updated_by = $request->input('updated_by');
@@ -107,6 +113,12 @@ class MdProductController extends Controller
 
         $product_detail = $request->input('product_detail');
         $product_modifiers = $request->input('product_modifiers');
+        $product_brands = $request->input('product_brand');
+        $product_branches = $request->input('product_branch');
+        $product_categories = $request->input('product_category');
+        $product_allergies = $request->input('product_allergy');
+        $product_diets = $request->input('product_diet');
+
 
 
         if ($product_detail) {
@@ -130,7 +142,67 @@ class MdProductController extends Controller
             }
         }
 
-        return response()->json($data);
+        if ($product_brands) {
+            foreach($product_brands as $product_brand){
+                $brandData = new MdProductBrand();
+                 $brandData->md_product_id = $latestMdProductId;
+                 $brandData->cd_brand_id = $product_brand['cd_brands'];
+                 $brandData->save();
+            }
+        }
+
+        if ($product_branches) {
+            foreach($product_branches as $product_branch){
+                $branchData = new MdProductBranch();
+                 $branchData->md_product_id = $latestMdProductId;
+                 $branchData->cd_branch_id = $product_branch['cd_branches'];
+                 $branchData->save();
+            }
+        }
+
+        if ($product_categories) {
+            foreach($product_categories as $product_category){
+                $productCategoryData = new MdProductProductCategory();
+                 $productCategoryData->md_product_id = $latestMdProductId;
+                 $productCategoryData->md_product_category_id = $product_category['md_product_categories'];
+                 $productCategoryData->save();
+            }
+        }
+
+        if ($product_allergies) {
+            foreach($product_allergies as $product_allergy){
+                $allergyData = new MdProductAllergy();
+                 $allergyData->md_product_id = $latestMdProductId;
+                 $allergyData->md_allergy_id = $product_allergy['md_allergies'];
+                 $allergyData->save();
+            }
+        }
+
+        if ($product_diets) {
+            foreach($product_diets as $product_diet){
+                $dietData = new MdProductDiet();
+                 $dietData->md_product_id = $latestMdProductId;
+                 $dietData->md_diet_id = $product_diet['md_diets'];
+                 $dietData->save();
+            }
+        }
+
+        // $data = MdProduct::with('client' , 'product_branch.branch','product_brand.brand','product_product_category.product_category','product_detail','product_modifier.modifier','product_diet.diet','product_allergy.allergy')->where('md_product_id',$latestMdProductId)->get();
+        // return response()->json(['data'=>$data]);
+
+        $data = MdProduct::with([
+            'client',
+            'product_branch.branch',
+            'product_brand.brand',
+            'product_product_category.product_category',
+            'product_detail',
+            'product_modifier.modifier',
+            'product_diet.diet',
+            'product_allergy.allergy',
+        ])->where('md_product_id', $latestMdProductId)->get();
+
+          return response()->json(['data' => $data]);
+        
     }
 
     /**

@@ -11,4 +11,7 @@ class MdProductDetail extends Model
 
     protected $primaryKey = 'md_product_detail_id';
     protected $guarded = ['md_product_detail_id'];
+    public function product(){
+        return $this->belongsTo(MdProductroduct::class, 'md_product_id');
+    }
 }
